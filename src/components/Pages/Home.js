@@ -1,11 +1,14 @@
 import React from 'react';
-import NavigationBar from '../common/NavigationBar';
+import HomePageBanner from '../main-components/HomePageBanner';
+import NavigationBar from '../main-components/NavigationBar';
+import TopProducts from '../main-components/TopProducts';
 
 const Home = () => {
     return (
         <div>
             <NavigationBar />
-            <p>This is home</p>
+            <HomePageBanner images={["./1png", "./1.png", "./1png", "./1.png", "./1png", "./1.png",]} />
+            <TopProducts />
         </div>
     );
 };

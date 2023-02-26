@@ -30,17 +30,17 @@ const Search = () => {
     }
 
     return (
-        <div className='mx-4'>
+        <div className='w-full'>
             <form onSubmit={(e)=> searchProduct(e)}>
                 <div className={`flex shadow-md ${searchSuggestions.length == 0 ? 'rounded-full' : 'rounded-t-[15px]'} overflow-hidden h-[35px]`}>
-                    <input ref={searchInput} onBlur={() => setSearchSuggestions([])} onChange={searchSuggestionProvider} type="text" className='flex-grow bg-gray-100 h-full px-4 outline-0' />
-                    <button onClick={searchProduct} className='bg-gray-100 h-full px-4'>
+                    <input ref={searchInput} onBlur={() => setSearchSuggestions([])} onChange={searchSuggestionProvider} type="text" className='flex-grow bg-gray-100 h-full px-4 outline-0 font-bold ' placeholder='Search...' />
+                    {/* <button onClick={searchProduct} className='bg-gray-100 h-full px-4'>
                         <img className='h-[20px]' src="/search-icon.svg" alt="" />
-                    </button>
+                    </button> */}
                 </div>
             </form>
-            <div className='absolute bg-gray-100'>
-                <ul>
+            <div className='absolute bg-[white] w-full'>
+                <ul className='px-4'>
                     {searchSuggestions.map(productName => <li onMouseDown={(e) => e.preventDefault()} onClick={(e) => searchProduct(e, productName)} className='h-[30px] font-bold cursor-pointer'>{productName}</li>)}
                 </ul>
             </div>
