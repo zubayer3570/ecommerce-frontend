@@ -13,7 +13,7 @@ const HomePageBanner = () => {
                 pagination={{ clickable: true }}
                 modules={[Pagination, Autoplay]}
                 autoplay={{
-                    delay: 2500
+                    delay: 2500,
                 }}
                 loop={true}
             >

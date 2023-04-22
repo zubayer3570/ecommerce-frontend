@@ -10,6 +10,9 @@ module.exports = {
       '3' : "#7868E6",
       '4' : "#EDEEF7",
     },
+    boxShadow: {
+      "1" : "rgba(0, 0, 0, 0.35) 0px 5px 15px;",
+    },
     extend: {},
   },
   plugins: [],

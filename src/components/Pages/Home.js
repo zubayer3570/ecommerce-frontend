@@ -1,15 +1,18 @@
 import React from 'react';
 import HomePageBanner from '../main-components/HomePageBanner';
-import NavigationBar from '../main-components/NavigationBar';
 import TopProducts from '../main-components/TopProducts';
+import products from '../../data'
+import ProductCard from '../main-components/ProductCard';
 
 const Home = () => {
     return (
-        <div>
-            <NavigationBar />
-            <HomePageBanner images={["./1png", "./1.png", "./1png", "./1.png", "./1png", "./1.png",]} />
+        <>
+            <HomePageBanner />
             <TopProducts />
-        </div>
+            <div className='grid grid-cols-4 mx-2'>
+                {products.map(product => <ProductCard productData={product} key={product.id} />)}
+            </div>
+        </>
     );
 };
 
