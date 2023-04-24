@@ -15,7 +15,7 @@ const ProductCard = ({ productData }) => {
                 <p>{productData.price}</p>
             </div>
             <div className='font-bold' >
-                <Link to={`/payment/${productData.id}`} state={productData} className='inline-block p-3 bg-3 rounded-md mr-4 shadow-1'>
+                <Link to={`/payment/${productData.id}`} state={productData} className='inline-block p-3 bg-3 rounded-md mr-4 shadow-first'>
                     <p className='text-[white]'>Buy Now</p>
                 </Link>
                 <button onClick={() => dispatch(addToCart(productData))} className='p-3 bg-2 rounded-md'>Add to Cart+</button>

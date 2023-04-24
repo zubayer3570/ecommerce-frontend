@@ -52,7 +52,7 @@ const Payment = () => {
                 </div>
                 <p className='font-bold text-[20px] mb-2'>Grand Total: ${grandTotal}</p>
                 <div className='font-bold' >
-                    <button className='p-3 bg-3 rounded-md mr-4 shadow-1'>
+                    <button className='p-3 bg-3 rounded-md mr-4 shadow-first'>
                         <p onClick={goToCheckout} className='text-[white]'>Checkout</p>
                     </button>
                 </div>

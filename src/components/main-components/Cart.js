@@ -8,7 +8,7 @@ const Cart = () => {
         <>
             <div className='mx-4'>
                 {
-                    cart.map(cartItem=> <CartCard key={cartItem.id} data={cartItem} />)
+                    cart?.map(cartItem=> <CartCard key={cartItem.id} data={cartItem} />)
                 }
             </div>
         </>

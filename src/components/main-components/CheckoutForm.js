@@ -62,7 +62,7 @@ export default function CheckoutForm() {
       <PaymentElement />
       <button disabled={isLoading || !stripe || !elements} id="submit" className="rounded-md p-4 bg-3 mt-4 font-bold text-[white]">
         <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+          {isLoading ? <div className="spinner" id="spinner">Paying</div> : "Pay now"}
         </span>
       </button>
     </form>

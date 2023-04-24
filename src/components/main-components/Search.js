@@ -43,9 +43,9 @@ const Search = () => {
     }
 
     return (
-        <form onSubmit={searchProduct} className={`w-full relative`}>
-            {/* <div className={`flex ${searchBarState ? "shadow-1" : "shadow-0"} ${searchSuggestions.length == 0 ? 'rounded-full' : 'rounded-t-[15px]'} overflow-hidden h-[35px]`}> */}
-            <div className={`flex ${searchSuggestions.length == 0 ? 'rounded-full' : 'rounded-t-[15px]'} overflow-hidden h-[35px]`}>
+        <form onSubmit={searchProduct} className={"w-full relative"}>
+            {/* <div className={`flex ${searchBarState ? "shadow-first" : "shadow-0"} ${searchSuggestions.length == 0 ? 'rounded-full' : 'rounded-t-[15px]'} overflow-hidden h-[35px]`}> */}
+            <div className={searchSuggestions.length == 0 ? 'rounded-full flex overflow-hidden h-[35px]' : 'rounded-t-[15px] flex overflow-hidden h-[35px]'}>
                 <input ref={searchInput} onBlur={() => setSearchSuggestions([])} onChange={searchSuggestionProvider} type="text" className='flex-grow bg-gray-100 h-full px-4 outline-0 font-bold ' placeholder='Search...' />
                 {/* <button onClick={searchProduct} className='bg-gray-100 h-full px-4'>
                     <img className='h-[20px]' src="/search-icon.svg" alt="" />

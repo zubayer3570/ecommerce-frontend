@@ -14,7 +14,7 @@ const Product = () => {
                     <p className='text-[25px] font-bold'>{productData.title}</p>
                     <p className='my-4'>{productData.description}</p>
                     <div className='font-bold' >
-                        <button className='p-3 bg-3 rounded-md mr-4 shadow-1'>
+                        <button className='p-3 bg-3 rounded-md mr-4 shadow-first'>
                             <p className='text-[white]'>Buy Now</p>
                         </button>
                         <button className='p-3 bg-2 rounded-md'>Add to Cart+</button>
