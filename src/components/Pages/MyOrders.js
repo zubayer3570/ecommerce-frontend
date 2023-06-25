@@ -1,16 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
+import MyOrdersCard from '../main-components/MyOrdersCard';
 
 const MyOrders = () => {
-    const userCredentials = useSelector(state=>state.login)
-    useEffect(()=>{
-        fetch("http://localhost:5000/my-orders")
-        .then(res=>res.json())
-        .then(data=>console.log(data))
-    }, [])
+    const myOrders = useSelector(state => state.myOrders)
     return (
-        <div>
-            
+        <div className='grid grid-cols-4 mx-4 gap-2'>
+            {
+                myOrders.map(order => <MyOrdersCard key={order.id} orderDetails={order} />)
+            }
         </div>
     );
 };

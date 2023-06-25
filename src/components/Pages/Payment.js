@@ -1,7 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux'
 
 const Payment = () => {
+    const userCredentials = useSelector(state => state.user)
     const navigate = useNavigate()
     const quantityInput = useRef()
     const productData = useLocation().state;
@@ -14,11 +16,9 @@ const Payment = () => {
         setQuantity(parseInt(quantityInput.current.value))
         setGrandTotal(parseInt(quantityInput.current.value) * productData.price)
     }
-    const goToCheckout = () =>{
-        navigate("/checkout", {
-            state: {quantity, productData}
-        })
-    }
+
+    const goToCheckout = () => navigate("/checkout", { state: { email: userCredentials.email, productData, quantity } })
+
     return (
         <div className='flex mx-4'>
             <div className='shrink-0 w-[400px] bg-[red]'>
@@ -54,6 +54,9 @@ const Payment = () => {
                 <div className='font-bold' >
                     <button className='p-3 bg-3 rounded-md mr-4 shadow-first'>
                         <p onClick={goToCheckout} className='text-[white]'>Checkout</p>
+                    </button>
+                    <button className='p-3 bg-3 rounded-md mr-4 shadow-first'>
+                        <p onClick={() => navigate('/')} className='text-[white]'>Continue shopping</p>
                     </button>
                 </div>
             </div>

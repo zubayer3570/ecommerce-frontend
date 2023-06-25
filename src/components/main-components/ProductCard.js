@@ -1,12 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { addToCart } from '../../features/cartSlice';
 
 const ProductCard = ({ productData }) => {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     return (
-        <div className='w-[300px] rounded-md'>
+        <div onClick={() => navigate('/product/' + productData.id, { state: productData })} className='w-[300px] rounded-md cursor-pointer'>
             <div className='h-[200px] overflow-hidden rounded-md m-2'>
                 <img src={productData.thumbnail} className="w-full" alt="" />
             </div>
@@ -15,10 +16,22 @@ const ProductCard = ({ productData }) => {
                 <p>{productData.price}</p>
             </div>
             <div className='font-bold' >
-                <Link to={`/payment/${productData.id}`} state={productData} className='inline-block p-3 bg-3 rounded-md mr-4 shadow-first'>
+                <Link
+                    onClick={(e) => e.stopPropagation()}
+                    to={`/payment/${productData.id}`}
+                    state={productData}
+                    className='inline-block p-3 bg-3 rounded-md mr-4 shadow-first'
+                >
                     <p className='text-[white]'>Buy Now</p>
                 </Link>
-                <button onClick={() => dispatch(addToCart(productData))} className='p-3 bg-2 rounded-md'>Add to Cart+</button>
+                <button
+                    onClick={(e) => {
+                        e.stopPropagation()
+                        dispatch(addToCart(productData))
+                    }}
+                    className='p-3 bg-2 rounded-md'
+                >
+                    Add to Cart+</button>
             </div>
         </div>
     );

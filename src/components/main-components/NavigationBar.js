@@ -1,12 +1,16 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Search from './Search';
+import { fetchMyOrders } from '../../features/myOrdersSlice';
 
 const NavigationBar = () => {
-    const userCredentials = useSelector(state => state.login)
+    const userCredentials = useSelector(state => state.user)
+    const dispatch = useDispatch()
     const cartItem = useSelector(state => state.cart)
+    const myOrders = useSelector(state => state.myOrders)
     const navigate = useNavigate()
+    useEffect(() => { dispatch(fetchMyOrders(userCredentials.email)) }, [])
     return (
 
         <div className='sticky top-0 z-[2]'>
@@ -20,13 +24,29 @@ const NavigationBar = () => {
 
                 <div className='hidden lg:flex items-center justify-end pr-8'>
                     <div className='relative text-[white] text-[18px]'>
-                        <div className='absolute top-[-8px] left-[35px] text-[12px] flex justify-center items-center h-[18px] w-[18px] bg-[red] text-[white] font-black rounded-full'>
-                            <p>{cartItem?.length}</p>
-                        </div>
+                        {
+                            cartItem?.length == 0 ?
+                                <div></div>
+                                :
+                                <div className='absolute top-[-8px] left-[35px] text-[12px] flex justify-center items-center h-[18px] w-[18px] bg-[red] text-[white] font-black rounded-full'>
+                                    <p>{cartItem?.length}</p>
+                                </div>
+                        }
                         <Link to='/cart' className='mr-8'>Cart</Link>
                     </div>
+                    <div className='relative text-[white] text-[18px]'>
+                        {
+                            myOrders?.length == 0 ?
+                                <div></div>
+                                :
+                                <div className='absolute top-[-8px] left-[55px] text-[12px] flex justify-center items-center h-[18px] w-[18px] bg-[red] text-[white] font-black rounded-full'>
+                                    <p>{myOrders?.length}</p>
+                                </div>
+                        }
+                        <Link to={'/my-orders'}>Orders</Link>
+                    </div>
                     <div className='text-[white] mr-8 cursor-pointer'>
-                        <Link to={'/my-orders'}>My Orders</Link>
+
                     </div>
                     {
                         userCredentials ?

@@ -1,9 +1,10 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../features/loginSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../features/userSlice';
 import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
+    const userCredentials = useSelector(state=>state.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const logoutUser = () => {
@@ -12,8 +13,11 @@ const ProfilePage = () => {
     }
     return (
         <div>
+            <div className='flex justify-center'>
+            <img src={userCredentials.proPic} className='w-44 rounded-full' alt="" />
+            </div>
+            <p>Name: <span>{userCredentials.name}</span></p>
             <button onClick={logoutUser}>Logout</button>
-            this is profile page
         </div>
     );
 };

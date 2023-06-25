@@ -2,8 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 const Product = () => {
-    const productData = useLocation()
-    console.log(productData)
+    const productData = useLocation().state
     return (
         <>
             <div className='flex mx-4'>
