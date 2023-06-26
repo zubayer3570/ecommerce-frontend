@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Search from './Search';
 import { fetchMyOrders } from '../../features/myOrdersSlice';
+import { userLogin } from '../../features/userSlice';
 
 const NavigationBar = () => {
-    const userCredentials = useSelector(state => state.user)
     const dispatch = useDispatch()
+    const userCredentials = useSelector(state => state.user)
     const cartItem = useSelector(state => state.cart)
     const myOrders = useSelector(state => state.myOrders)
     const navigate = useNavigate()
-    useEffect(() => { dispatch(fetchMyOrders(userCredentials.email)) }, [])
+    useEffect(() => { dispatch(fetchMyOrders(userCredentials?.email)) }, [])
     return (
 
         <div className='sticky top-0 z-[2]'>
@@ -43,13 +44,18 @@ const NavigationBar = () => {
                                     <p>{myOrders?.length}</p>
                                 </div>
                         }
-                        <Link to={'/my-orders'}>Orders</Link>
+                        {
+                            userCredentials?.admin ?
+                                <Link to={'/all-orders'}>Manage Orders</Link>
+                                :
+                                <Link to={'/my-orders'}>Orders</Link>
+                        }
                     </div>
                     <div className='text-[white] mr-8 cursor-pointer'>
 
                     </div>
                     {
-                        userCredentials ?
+                        userCredentials?._id ?
                             <div onClick={() => navigate("/profile")}>
                                 <img src={userCredentials.proPic} className='h-[35px] w-[35px] rounded-full cursor-pointer' alt="" />
                             </div>

@@ -1,15 +1,22 @@
 import axios from 'axios';
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
+import ProductCard from '../main-components/ProductCard';
 
 const SearchResults = () => {
-    const {searchText} = useParams()
+    const [searchParams, setSearchPararms] = useSearchParams()
     const [results, setResults] = useState()
-    const firstWordOfSearch = searchText.slice(0, searchText.indexOf(' ') + 1)
-    const data = axios.get
+    const firstWordOfSearch = searchParams.get("sk").split(' ')[0];
+    useEffect(() => {
+        axios
+            .post("http://localhost:5000/search", { searchWord: firstWordOfSearch })
+            .then(res => setResults(res.data.serachResults))
+    }, [])
     return (
-        <div>
-            
+        <div className='grid grid-cols-4 mx-4 gap-4'>
+            {
+                results?.map(product => <ProductCard productData={product} key={product._id} />)
+            }
         </div>
     );
 };

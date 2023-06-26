@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../features/userSlice';
+import { logout, userLogin } from '../../features/userSlice';
 import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
@@ -14,9 +14,9 @@ const ProfilePage = () => {
     return (
         <div>
             <div className='flex justify-center'>
-            <img src={userCredentials.proPic} className='w-44 rounded-full' alt="" />
+            <img src={userCredentials?.proPic} className='w-44 rounded-full' alt="" />
             </div>
-            <p>Name: <span>{userCredentials.name}</span></p>
+            <p>Name: <span>{userCredentials?.name}</span></p>
             <button onClick={logoutUser}>Logout</button>
         </div>
     );

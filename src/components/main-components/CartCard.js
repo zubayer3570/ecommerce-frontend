@@ -29,7 +29,7 @@ const CartCard = (props) => {
                     {/* <p className='text-[white]'>Buy Now</p> */}
                     Buy Now
                 </button>
-                <button onClick={remove} className='p-2 bg-3 rounded-md mr-4 text-[white]'>
+                <button onClick={remove} className='p-2 bg-[red] rounded-md mr-4 text-[white]'>
                     Remove
                 </button>
             </div>

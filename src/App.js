@@ -10,23 +10,27 @@ import ProfilePage from './components/Pages/ProfilePage';
 import Payment from './components/Pages/Payment';
 import MyOrders from './components/Pages/MyOrders';
 import OrderDetails from './components/Pages/OrderDetails';
+import Footer from './components/main-components/Footer';
 
 function App() {
   return (
-    <Routes>
-      <Route path='/' element={<Home />}></Route>
-      <Route path='/cart' element={<Cart />}></Route>
-      <Route path='/search-results/:searchText' element={<SearchResults />}></Route>
-      <Route path='/product/:productID' element={<Product />}></Route>
-      <Route path='/payment/:productID' element={<Payment />}></Route>
-      <Route path='/signup' element={<Signup />}></Route>
-      <Route path='/login' element={<Login />}></Route>
-      <Route path='/signup' element={<Signup />}></Route>
-      <Route path='/checkout' element={<Checkout />}></Route>
-      <Route path='/profile' element={<ProfilePage />}></Route>
-      <Route path='/my-orders' element={<MyOrders />}></Route>
-      <Route path='/order-details' element={<OrderDetails />}></Route>
-    </Routes>
+    <>
+      <Routes>
+        <Route path='/' element={<Home />}></Route>
+        <Route path='/cart' element={<Cart />}></Route>
+        <Route path='/search-results' element={<SearchResults />}></Route>
+        <Route path='/product/:productID' element={<Product />}></Route>
+        <Route path='/payment/:productID' element={<Payment />}></Route>
+        <Route path='/signup' element={<Signup />}></Route>
+        <Route path='/login' element={<Login />}></Route>
+        <Route path='/signup' element={<Signup />}></Route>
+        <Route path='/checkout' element={<Checkout />}></Route>
+        <Route path='/profile' element={<ProfilePage />}></Route>
+        <Route path='/my-orders' element={<MyOrders />}></Route>
+        <Route path='/order-details' element={<OrderDetails />}></Route>
+      </Routes>
+      <Footer />
+    </>
   );
 }
 
