@@ -1,22 +1,31 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useLocation, useParams } from 'react-router-dom';
+import { addToCart } from '../../features/cartSlice';
+import { fetchProduct } from '../../features/productSlice';
 
 const Product = () => {
-    const productData = useLocation().state
+    const { productID } = useParams()
+    const dispatch = useDispatch()
+    const { selectedProduct: productData } = useSelector(state => state.product)
+    useEffect(() => { dispatch(fetchProduct(productID)) }, [])
     return (
         <>
             <div className='flex mx-4'>
                 <div className='shrink-0 w-[400px] bg-[red]'>
-                    <img className='w-[full] bg-green-500' src={productData.thumbnail} alt="" />
+                    <img className='w-[full] bg-green-500' src={productData?.thumbnail} alt="" />
                 </div>
                 <div className='ml-4'>
-                    <p className='text-[25px] font-bold'>{productData.title}</p>
-                    <p className='my-4'>{productData.description}</p>
+                    <p className='text-[25px] font-bold'>{productData?.title}</p>
+                    <p className='my-4'>{productData?.description}</p>
                     <div className='font-bold' >
-                        <button className='p-3 bg-3 rounded-md mr-4 shadow-first'>
+                        <Link
+                            to={`/payment`}
+                            className='p-3 bg-3 rounded-md mr-4 shadow-first inline-block'
+                        >
                             <p className='text-[white]'>Buy Now</p>
-                        </button>
-                        <button className='p-3 bg-2 rounded-md'>Add to Cart+</button>
+                        </Link>
+                        <button onClick={() => dispatch(addToCart(productData))} className='p-3 bg-2 rounded-md'>Add to Cart+</button>
                     </div>
                 </div>
             </div>

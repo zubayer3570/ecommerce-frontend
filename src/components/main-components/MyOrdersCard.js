@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { cancelOrder } from '../../features/myOrdersSlice';
+import { selectOrder } from '../../features/selectedSlice';
 
 const MyOrdersCard = ({ orderDetails }) => {
     const dispatch = useDispatch()
@@ -14,7 +15,7 @@ const MyOrdersCard = ({ orderDetails }) => {
             <p> <span className='font-bold'>Quantity:</span> {orderDetails.quantity} piece</p>
             <p><span className='font-bold'>Amount:</span> {orderDetails.totalAmount}tk</p>
             <div className='grid grid-cols-2 gap-2'>
-                <Link to="/order-details" state={orderDetails} className='block text-center font-bold text-white text-[white] rounded-md bg-3 py-1'>See details</Link>
+                <Link to={"/order-details/" + orderDetails._id} className='block text-center font-bold text-white text-[white] rounded-md bg-3 py-1'>See details</Link>
                 <button onClick={() => dispatch(cancelOrder(orderDetails))} className='block text-center font-bold text-white text-[white] rounded-md bg-[red] py-1' >Cancel</button>
             </div>
         </div>

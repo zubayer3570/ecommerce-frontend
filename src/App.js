@@ -4,17 +4,29 @@ import SearchResults from './components/Pages/SearchResults';
 import Product from './components/Pages/Product';
 import Signup from './components/Pages/Signup';
 import Login from './components/Pages/Login';
-import Cart from './components/main-components/Cart';
 import Checkout from './components/Pages/Checkout';
 import ProfilePage from './components/Pages/ProfilePage';
 import Payment from './components/Pages/Payment';
 import MyOrders from './components/Pages/MyOrders';
 import OrderDetails from './components/Pages/OrderDetails';
 import Footer from './components/main-components/Footer';
+import Cart from './components/Pages/Cart';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { userLogin } from './features/userSlice';
+import ManageAllOders from './components/Pages/ManageAllOders';
+import AdminOrderDetails from './components/Pages/AdminOrderDetails';
+
+const savedUser = JSON.parse(localStorage.getItem("soundex-user-credentials"))
 
 function App() {
+  const dispatch = useDispatch()
+  useEffect(() => { dispatch(userLogin(savedUser)) }, [])
   return (
     <>
+      <ToastContainer />
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='/cart' element={<Cart />}></Route>
@@ -27,7 +39,9 @@ function App() {
         <Route path='/checkout' element={<Checkout />}></Route>
         <Route path='/profile' element={<ProfilePage />}></Route>
         <Route path='/my-orders' element={<MyOrders />}></Route>
-        <Route path='/order-details' element={<OrderDetails />}></Route>
+        <Route path='/order-details/:orderID' element={<OrderDetails />}></Route>
+        <Route path='/all-orders' element={<ManageAllOders />}></Route>
+        <Route path='/admin-order-details/:orderID' element={<AdminOrderDetails />}></Route>
       </Routes>
       <Footer />
     </>

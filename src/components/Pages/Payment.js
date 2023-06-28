@@ -6,7 +6,8 @@ const Payment = () => {
     const userCredentials = useSelector(state => state.user)
     const navigate = useNavigate()
     const quantityInput = useRef()
-    const productData = useLocation().state;
+    // const productData = useLocation().state;
+    const productData = useSelector(state=> state.selected.selectedProduct)
     const [quantity, setQuantity] = useState(1)
     const [grandTotal, setGrandTotal] = useState(productData.price)
     const updateQuantity = (action) => {

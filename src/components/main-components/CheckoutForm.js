@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addOrder, fetchMyOrders } from "../../features/myOrdersSlice";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function CheckoutForm({ orderData }) {
   const navigate = useNavigate()
@@ -58,6 +59,8 @@ export default function CheckoutForm({ orderData }) {
       setMessage("An unexpected error occurred.");
     }
     if (!error) {
+      toast("Payment Confirmed!")
+      toast("Order has been Taken!")
       dispatch(addOrder(orderData))
     }
     navigate('/');

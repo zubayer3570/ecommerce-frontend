@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { toast } from 'react-toastify'
 
 const cartSlice = createSlice({
     name: "cart",
@@ -9,8 +10,10 @@ const cartSlice = createSlice({
                 const exists = state.find(cartItem => cartItem.id === action.payload.id)
                 if (!exists) {
                     localStorage.setItem("soundex-cart", JSON.stringify([...state, action.payload]))
+                    toast("Added to the Cart!")
                     return [...state, action.payload]
                 }
+                toast("Already added to the Cart!")
             } else {
                 localStorage.setItem("soundex-cart", JSON.stringify([action.payload]))
                 return [action.payload]

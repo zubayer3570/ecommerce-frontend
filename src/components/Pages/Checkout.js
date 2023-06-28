@@ -10,7 +10,6 @@ const stripePromise = loadStripe("pk_test_51L1tk9Hl8mJ3Qhh07bjmxqo4qYdRo6DXZwPtf
 
 const Checkout = () => {
     const data = useLocation().state
-    const dispatch = useDispatch()
     const [clientSecret, setClientSecret] = useState(undefined)
     useEffect(() => {
         axios
