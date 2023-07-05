@@ -4,24 +4,24 @@ import axios from 'axios'
 // let savedUser = JSON.parse(localStorage.getItem("soundex-user-credentials"))
 
 // const fetchUserFirst = async (data) => {
-//     const res = await axios.post("http://192.168.1.104:5000/login", data)
+//     const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/login", data)
 //     savedUser = res.data
 //     return res.data
 // }
 // fetchUserFirst(savedUser);
 
 export const userLogin = createAsyncThunk("login", async (data) => {
-    const res = await axios.post("http://192.168.1.104:5000/login", data);
+    const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/login", data);
     return res.data;
 })
 
 export const userSignup = createAsyncThunk("signup", async (data) => {
-    const res = await axios.post("http://192.168.1.104:5000/signup", data);
+    const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/signup", data);
     return res.data;
 })
 
 export const fetchAllUsers = createAsyncThunk("all-users", async () => {
-    const res = await axios.get("http://192.168.1.104:5000/all-users")
+    const res = await axios.get("https://ecommerce-backend-d4lh.onrender.com/all-users")
     return res.data.allUsers
 })
 

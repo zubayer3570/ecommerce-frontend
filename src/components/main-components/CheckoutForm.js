@@ -42,7 +42,7 @@ export default function CheckoutForm({ orderData }) {
       elements,
       // confirmParams: {
       //   // Make sure to change this to your payment completion page
-      //   return_url: "http://192.168.1.104:3000",
+      //   return_url: "https://ecommerce-backend-d4lh.onrender.com:3000",
       // },
       redirect: "if_required"
     });

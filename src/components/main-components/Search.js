@@ -25,7 +25,6 @@ const Search = () => {
     const searchProduct = (e, product) => {
         e.preventDefault()
         if (product?._id) {
-            console.log(product)
             searchInput.current.value = product.title
             searchInput.current.focus = false
             navigate(`/product/${product._id}`, { state: product })
