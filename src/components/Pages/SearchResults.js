@@ -9,7 +9,7 @@ const SearchResults = () => {
     const firstWordOfSearch = searchParams.get("sk").split(' ')[0];
     useEffect(() => {
         axios
-            .post("http://localhost:5000/search", { searchWord: firstWordOfSearch })
+            .post("http://192.168.1.104:5000/search", { searchWord: firstWordOfSearch })
             .then(res => setResults(res.data.serachResults))
     }, [])
     return (

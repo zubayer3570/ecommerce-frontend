@@ -1,15 +1,22 @@
-import React, { useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux'
+import React, { useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchProduct } from '../../features/productSlice';
 
 const Payment = () => {
-    const userCredentials = useSelector(state => state.user)
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const quantityInput = useRef()
-    // const productData = useLocation().state;
-    const productData = useSelector(state=> state.selected.selectedProduct)
+    const { productID } = useParams()
     const [quantity, setQuantity] = useState(1)
-    const [grandTotal, setGrandTotal] = useState(productData.price)
+    const {loggedInUser} = useSelector(state => state.user)
+    const { selectedProduct: productData } = useSelector(state => state.product)
+    const [grandTotal, setGrandTotal] = useState(productData?.price)
+
+    useEffect(() => {
+        dispatch(fetchProduct(productID))
+    }, [])
+
     const updateQuantity = (action) => {
         const inputValue = parseInt(quantityInput.current.value)
         if (action === "increment") quantityInput.current.value = inputValue + 1
@@ -18,8 +25,13 @@ const Payment = () => {
         setGrandTotal(parseInt(quantityInput.current.value) * productData.price)
     }
 
-    const goToCheckout = () => navigate("/checkout", { state: { email: userCredentials.email, productData, quantity } })
+    const goToCheckout = () => {
+        navigate("/checkout", { state: { email: loggedInUser.email, productData, quantity } })
+    }
 
+    if (!productData) {
+        return;
+    }
     return (
         <div className='flex mx-4'>
             <div className='shrink-0 w-[400px] bg-[red]'>

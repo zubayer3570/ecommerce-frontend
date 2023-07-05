@@ -7,7 +7,7 @@ const cartSlice = createSlice({
     reducers: {
         addToCart: (state, action) => {
             if (state) {
-                const exists = state.find(cartItem => cartItem.id === action.payload.id)
+                const exists = state.find(cartItem => cartItem._id === action.payload._id)
                 if (!exists) {
                     localStorage.setItem("soundex-cart", JSON.stringify([...state, action.payload]))
                     toast("Added to the Cart!")
@@ -21,14 +21,9 @@ const cartSlice = createSlice({
         },
         removeFromCart: (state, action) => {
             const target = action.payload
-            state.forEach((cartItems, index) => {
-                if (cartItems.id === target.id) {
-                    state.splice(index, 1)
-                    const newState = JSON.parse(localStorage.getItem("soundex-cart"))
-                    newState.splice(index, 1)
-                    localStorage.setItem("soundex-cart", JSON.stringify(newState))
-                }
-            })
+            const newState = state.filter(cartItem => cartItem._id != target._id)
+            localStorage.setItem("soundex-cart", JSON.stringify(newState))
+            return [...newState]
         }
     }
 })

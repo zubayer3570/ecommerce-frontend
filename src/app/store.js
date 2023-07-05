@@ -1,18 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit'
 import cartReducer from '../features/cartSlice'
 import userReducer from '../features/userSlice'
-import myOrderReducer from '../features/myOrdersSlice'
-import adminReducer from '../features/adminSlice'
-import selectedReducer from '../features/selectedSlice'
 import productReducer from '../features/productSlice'
+import orderReducer from '../features/orderSlice'
+import loadingReducer from '../features/loadingSlice'
+import footerReducer from '../features/footerSlice'
 
 export default configureStore({
     reducer: {
+        loading: loadingReducer,
         product: productReducer,
-        selected: selectedReducer,
+        orders: orderReducer,
         cart: cartReducer,
         user: userReducer,
-        myOrders: myOrderReducer,
-        admin: adminReducer,
+        footer: footerReducer
     }
 })

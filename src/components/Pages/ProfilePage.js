@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout, userLogin } from '../../features/userSlice';
+import { logout } from '../../features/userSlice';
 import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
-    const userCredentials = useSelector(state=>state.user)
+    const { loggedInUser } = useSelector(state => state.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const logoutUser = () => {
@@ -14,10 +14,18 @@ const ProfilePage = () => {
     return (
         <div>
             <div className='flex justify-center'>
-            <img src={userCredentials?.proPic} className='w-44 rounded-full' alt="" />
+                <div className='w-44 h-44 rounded-full overflow-hidden'>
+                    <img src={loggedInUser?.proPic} className='w-full' alt="" />
+                </div>
             </div>
-            <p>Name: <span>{userCredentials?.name}</span></p>
-            <button onClick={logoutUser}>Logout</button>
+            <div className='flex justify-center mt-8'>
+                <div>
+                    <p className='font-semibold'><span className='font-bold text-[20px]'> Name: </span>{loggedInUser?.name}</p>
+                    <p className='font-semibold'><span className='font-bold text-[20px]'> Email: </span>{loggedInUser?.email}</p>
+                    <button onClick={logoutUser} className='inline-block p-3 bg-3 rounded-md mt-4  shadow-first font-bold text-[white]'>Logout</button>
+                    <button onClick={logoutUser} className='inline-block p-3 bg-3 rounded-md ml-4  shadow-first font-bold text-[white]'>Contact Us</button>
+                </div>
+            </div>
         </div>
     );
 };

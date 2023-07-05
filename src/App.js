@@ -13,17 +13,37 @@ import Footer from './components/main-components/Footer';
 import Cart from './components/Pages/Cart';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { userLogin } from './features/userSlice';
 import ManageAllOders from './components/Pages/ManageAllOders';
 import AdminOrderDetails from './components/Pages/AdminOrderDetails';
+import { fetchAllProducts } from './features/productSlice';
+import AddProduct from './components/Pages/AddProduct';
+import Spinner from './components/main-components/Spinner';
+import { fetchAllOrders } from './features/orderSlice';
+import SearchPage from './components/Pages/SearchPage';
 
 const savedUser = JSON.parse(localStorage.getItem("soundex-user-credentials"))
 
 function App() {
   const dispatch = useDispatch()
-  useEffect(() => { dispatch(userLogin(savedUser)) }, [])
+  const {loggedInUser} = useSelector(state => state.user)
+  const loading = useSelector(state => state.loading)
+  useEffect(() => {
+    dispatch(userLogin(savedUser))
+    dispatch(fetchAllProducts())
+  }, [])
+  useEffect(() => {
+    if (loggedInUser?.admin) {
+      dispatch(fetchAllOrders())
+    }
+  }, [loggedInUser])
+  const footerState = useSelector(state => state.footer)
+
+  // if (loading) {
+  //   return <Spinner />
+  // }
   return (
     <>
       <ToastContainer />
@@ -42,8 +62,10 @@ function App() {
         <Route path='/order-details/:orderID' element={<OrderDetails />}></Route>
         <Route path='/all-orders' element={<ManageAllOders />}></Route>
         <Route path='/admin-order-details/:orderID' element={<AdminOrderDetails />}></Route>
+        <Route path='/add-product' element={<AddProduct />}></Route>
+        <Route path='/search-page' element={<SearchPage />}></Route>
       </Routes>
-      <Footer />
+      <Footer position={footerState} />
     </>
   );
 }

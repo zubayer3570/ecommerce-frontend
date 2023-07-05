@@ -20,7 +20,7 @@ const Product = () => {
                     <p className='my-4'>{productData?.description}</p>
                     <div className='font-bold' >
                         <Link
-                            to={`/payment`}
+                            to={"/payment/" + productID}
                             className='p-3 bg-3 rounded-md mr-4 shadow-first inline-block'
                         >
                             <p className='text-[white]'>Buy Now</p>

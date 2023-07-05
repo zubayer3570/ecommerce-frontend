@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllOrders } from '../../features/adminSlice';
+import { useSelector } from 'react-redux';
 import AdminOrderCard from '../main-components/AdminOrderCard';
 
 const ManageAllOders = () => {
-    const { allOrders } = useSelector(state => state.admin)
-    const dispatch = useDispatch()
-    useEffect(() => { dispatch(fetchAllOrders()) }, [])
+    const { allOrders } = useSelector(state => state.orders)
+    // const dispatch = useDispatch()
+    // useEffect(() => { dispatch(fetchAllOrders()) }, [])
     return (
         <>
             <div className='grid grid-cols-3 font-bold'>

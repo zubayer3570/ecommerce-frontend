@@ -4,7 +4,7 @@ import './main.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import store from './app/store';
 import NavigationBar from './components/main-components/NavigationBar';
 

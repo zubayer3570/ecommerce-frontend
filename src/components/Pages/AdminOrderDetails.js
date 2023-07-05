@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
-import { fetchOrder, updateOrderStatus } from '../../features/adminSlice';
+import { fetchOrder, updateOrderStatus } from '../../features/orderSlice';
 
 const AdminOrderDetails = () => {
     const [toggle, setToggle] = useState(true)
     const { orderID } = useParams()
     const dispatch = useDispatch()
     const { selectedOrder: orderDetails } = useSelector(state => state.admin)
-    useEffect(() => { dispatch(fetchOrder(orderID)) }, [])
+    useEffect(() => { dispatch(fetchOrder(orderID)) }, [orderID])
     const updateStatus = (e) => {
         e.preventDefault()
         setToggle(!toggle)
-        dispatch(updateOrderStatus(orderID, e.target.orderStatus.value))
-        dispatch(fetchOrder(orderID))
+        dispatch(updateOrderStatus({ orderID, text: e.target.orderStatus.value }))
+        // dispatch(fetchOrder(orderID))
     }
     if (!orderDetails) {
         return

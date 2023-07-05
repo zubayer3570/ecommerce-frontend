@@ -1,8 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
-import { cancelOrder } from '../../features/myOrdersSlice';
-import { selectOrder } from '../../features/selectedSlice';
+import { cancelOrder } from '../../features/orderSlice';
 
 const MyOrdersCard = ({ orderDetails }) => {
     const dispatch = useDispatch()

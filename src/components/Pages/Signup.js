@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom';
-import { loginUser, userSignup } from '../../features/userSlice';
+import { userSignup } from '../../features/userSlice';
 
 const Signup = () => {
     const data = useSelector(state => state.user)
@@ -33,16 +33,6 @@ const Signup = () => {
         formData.append("profilePic", profilePic)
         formData.append("password", password)
         dispatch(userSignup(formData))
-        // fetch("http://localhost:5000/signup", {
-        //     method: "POST",
-        //     body: formData
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         // updateUserState
-        //         dispatch(loginUser(data))
-        //         navigate("/")
-        //     })
     }
     useEffect(() => { data?._id && navigate("/") }, [data])
     return (

@@ -13,9 +13,9 @@ const Checkout = () => {
     const [clientSecret, setClientSecret] = useState(undefined)
     useEffect(() => {
         axios
-            .post("http://localhost:5000/create-payment-intent", data)
+            .post("http://192.168.1.104:5000/create-payment-intent", data)
             .then(res => setClientSecret(res.data.client_secret))
-        // fetch("http://localhost:5000/create-payment-intent", {
+        // fetch("http://192.168.1.104:5000/create-payment-intent", {
         //     method: "POST",
         //     headers: {
         //         "Content-Type": "application/json",

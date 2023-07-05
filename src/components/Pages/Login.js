@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { userLogin } from '../../features/userSlice';
 
 const Login = () => {
-    const data = useSelector(state => state.user);
+    const { loggedInUser: data } = useSelector(state => state.user);
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const loginUserHandler = (e) => {
