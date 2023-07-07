@@ -1,56 +1,65 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import { auth } from '../init.firebase'
 
-// let savedUser = JSON.parse(localStorage.getItem("soundex-user-credentials"))
 
-// const fetchUserFirst = async (data) => {
-//     const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/login", data)
-//     savedUser = res.data
-//     return res.data
-// }
-// fetchUserFirst(savedUser);
 
-export const userLogin = createAsyncThunk("login", async (data) => {
-    const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/login", data);
-    return res.data;
+export const userSignup = createAsyncThunk("signup", async (data, { dispatch }) => {
+    try {
+        const { user } = await createUserWithEmailAndPassword(auth, data.get("email"), data.get("password"))
+        await sendEmailVerification(user)
+        const res = await axios.post("http://192.168.1.104:5000/signup", data);
+        return res.data;
+    } catch (err) {
+        return { message: err.message }
+    }
 })
 
-export const userSignup = createAsyncThunk("signup", async (data) => {
-    const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/signup", data);
-    return res.data;
+export const userLogin = createAsyncThunk("login", async (data, { dispatch }) => {
+    try {
+        if (!auth.currentUser) {
+            await signInWithEmailAndPassword(auth, data.email, data.password)
+        }
+        const res = await axios.post("http://192.168.1.104:5000/login", data);
+        localStorage.removeItem("accessToken")
+        localStorage.setItem("accessToken", JSON.stringify({ jwt: res.data.jwt }))
+        return res.data;
+    } catch (err) {
+        console.log(err)
+        return { message: err.message }
+    }
 })
 
-export const fetchAllUsers = createAsyncThunk("all-users", async () => {
-    const res = await axios.get("https://ecommerce-backend-d4lh.onrender.com/all-users")
+
+export const fetchAllUsers = createAsyncThunk("all-users", async (data, { dispatch }) => {
+    const res = await axios.get("http://192.168.1.104:5000/all-users",
+        {
+            headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
+        })
     return res.data.allUsers
 })
 
 
 const userSlice = createSlice({
     name: "userSlice",
-    // initialState: JSON.parse(localStorage.getItem("soundex-user-credentials")),
     initialState: { loggedInUser: {}, allUsers: [] },
     reducers: {
-        logout: () => {
-            localStorage.removeItem("soundex-user-credentials")
-            return null
+        logout: (state) => {
+            signOut(auth)
+            return { ...state, loggedInUser: {} }
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(userLogin.fulfilled, (state, action) => {
-            const data = action.payload
-            if (data._id) {
-                localStorage.setItem("soundex-user-credentials", JSON.stringify(data))
-            } else {
-                localStorage.removeItem("soundex-user-credentials")
-            }
-            return {...state, loggedInUser: data};
-        })
-
         builder.addCase(userSignup.fulfilled, (state, action) => {
-            localStorage.setItem("soundex-user-credentials", JSON.stringify(action.payload))
             return { ...state, loggedInUser: action.payload };
         })
+
+        builder.addCase(userLogin.fulfilled, (state, action) => {
+            const data = action.payload
+            return { ...state, loggedInUser: data };
+        })
+
         builder.addCase(fetchAllUsers.fulfilled, (state, action) => {
             state.allUsers = action.payload
             return { ...state, allUsers: action.payload };

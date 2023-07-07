@@ -2,14 +2,16 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchProduct } from '../../features/productSlice';
+import Spinner from '../main-components/Spinner';
 
 const Payment = () => {
+    const loading = useSelector(state => state.loading)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const quantityInput = useRef()
     const { productID } = useParams()
     const [quantity, setQuantity] = useState(1)
-    const {loggedInUser} = useSelector(state => state.user)
+    const { loggedInUser } = useSelector(state => state.user)
     const { selectedProduct: productData } = useSelector(state => state.product)
     const [grandTotal, setGrandTotal] = useState(productData?.price)
 
@@ -29,13 +31,16 @@ const Payment = () => {
         navigate("/checkout", { state: { email: loggedInUser.email, productData, quantity } })
     }
 
+    if (loading) { console.log("payment")
+        return <Spinner />
+    }
     if (!productData) {
         return;
     }
     return (
         <div className='flex mx-4'>
             <div className='shrink-0 w-[400px] bg-[red]'>
-                <img className='w-[full] bg-green-500' src={productData?.thumbnail} alt="" />
+                <img className='w-[full] bg-green-500' src={productData.image} alt="" />
             </div>
             <div className='ml-4'>
                 <p className='text-[25px] font-bold'>{productData.title}</p>

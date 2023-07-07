@@ -16,7 +16,7 @@ const NavigationBar = () => {
     return (
 
         <div className='sticky top-0 z-[2]'>
-            <div className='flex justify-between items-center h-[60px] bg-3 font-bold text-[18px] rounded-md m-4 px-4'>
+            <div className='flex justify-between items-center h-[50px] bg-3 font-bold text-[16px] rounded-md m-4 px-4'>
                 <div className='flex text-[white] items-center'>
                     <Link to='/' >Soundex</Link>
                 </div>
@@ -25,11 +25,11 @@ const NavigationBar = () => {
                     <Search />
                 </div>
 
-                <div className='hidden lg:flex text-[white] text-[18px]'>
+                <div className='hidden lg:flex text-[white]'>
                     {
                         loggedInUser?.admin ?
                             <>
-                                <div className='flex grid grid-cols-5 text-[white] text-[18px] mx-2'>
+                                <div className='flex grid grid-cols-5 text-[white] mx-2'>
                                     <Link to={'/all-orders'} className='col-span-4'>All Orders</Link>
                                     {
                                         allOrders?.length == 0 ?
@@ -47,7 +47,7 @@ const NavigationBar = () => {
                             :
 
                             <>
-                                <div className='grid grid-cols-2 text-[white] text-[18px]'>
+                                <div className='grid grid-cols-2 text-[white]'>
                                     <Link to='/cart'>Cart</Link>
                                     {
                                         cartItem?.length == 0 ?
@@ -60,7 +60,7 @@ const NavigationBar = () => {
                                 </div>
                                 {
                                     loggedInUser?._id ?
-                                        <div className='grid grid-cols-2 text-[white] text-[18px]'>
+                                        <div className='grid grid-cols-2 text-[white]'>
                                             <Link to={'/my-orders'}>Orders</Link>
                                             {
                                                 myOrders?.length == 0 ?
@@ -83,7 +83,7 @@ const NavigationBar = () => {
                     {
                         loggedInUser?._id ?
                             <div onClick={() => navigate("/profile")}>
-                                <img src={loggedInUser.proPic} className='h-[35px] w-[35px] rounded-full cursor-pointer' alt="" />
+                                <img src={loggedInUser.proPic} className='h-[30px] w-[30px] rounded-full cursor-pointer' alt="" />
                             </div>
                             :
                             <div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import MyOrdersCard from '../main-components/MyOrdersCard';
+import Spinner from '../main-components/Spinner';
 
 const MyOrders = () => {
     const {myOrders} = useSelector(state => state.orders)

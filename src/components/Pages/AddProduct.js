@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addProduct } from '../../features/productSlice';
+import Spinner from '../main-components/Spinner';
 
 const AddProduct = () => {
     const dispatch = useDispatch()
@@ -10,7 +11,7 @@ const AddProduct = () => {
         e.preventDefault()
         document.getElementById("getFile").click()
     }
-
+    
     const fileNameUpdate = (e) => {
         if (e.target.files[0].type.includes("image")) {
             document.getElementById('error').innerText = ""
@@ -21,7 +22,7 @@ const AddProduct = () => {
             document.getElementById('placeholderButton').innerText = "Upload again!!!"
         }
     }
-
+    
     const addProductData = (e) => {
         e.preventDefault()
         const title = e.target.title.value

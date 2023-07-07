@@ -36,7 +36,7 @@ const Search = () => {
 
     return (
         <form onSubmit={searchProduct} className={"w-full relative"}>
-            <div className={searchSuggestions.length == 0 ? 'rounded-full flex overflow-hidden h-[35px] bg-[white]' : 'rounded-t-[15px] flex overflow-hidden h-[35px] bg-[white]'}>
+            <div className={searchSuggestions.length == 0 ? 'rounded-full flex overflow-hidden h-[30px] bg-[white]' : 'rounded-t-[15px] flex overflow-hidden h-[35px] bg-[white]'}>
                 <input ref={searchInput} onBlur={() => setSearchSuggestions([])} onChange={searchSuggestionProvider} type="text" className='flex-grow bg-gray-100 h-full px-4 outline-0 font-bold ' placeholder='Search...' />
                 <button>
                     <img src="/search-icon.svg" className='scale-[0.75] mr-2' alt="" />
@@ -46,9 +46,9 @@ const Search = () => {
                 <div className='px-4'>
                     {searchSuggestions.map(product => {
                         return (
-                            <div onMouseDown={(e) => e.preventDefault()} onClick={(e) => searchProduct(e, product)} key={product.id} className='h-[45px] font-bold cursor-pointer hover:bg-2 p-[8px] rounded-md'>
+                            <div onMouseDown={(e) => e.preventDefault()} onClick={(e) => searchProduct(e, product)} key={product._id} className='h-[45px] font-bold cursor-pointer hover:bg-2 p-[8px] rounded-md' >
                                 <div className='flex'>
-                                    <img src={product.images[0]} className='w-[30px] h-[30px] overflow-hidden mr-4' alt="" />
+                                    <img src={product.image} className='w-[30px] h-[30px] overflow-hidden mr-4' alt="" />
                                     <p>{product.title.slice(0, 20)}</p>
                                 </div>
                             </div>

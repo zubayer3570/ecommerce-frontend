@@ -9,20 +9,20 @@ const ProductCard = ({ productData }) => {
     return (
         <div
             onClick={() => navigate('/product/' + productData._id)}
-            className='w-full rounded-md cursor-pointer shadow-first p-4'
+            className='w-full rounded-md cursor-pointer shadow-first p-3'
         >
-            <div className='h-[200px] overflow-hidden rounded-md m-2'>
+            <div className='h-[200px] overflow-hidden rounded-md mb-2'>
                 <img src={productData.image} className="w-full" alt="" />
             </div>
             <div>
-                <p className='text-[20px] font-bold'>{productData.title}</p>
-                <p> <span className='font-bold'>Price</span> {productData.price}</p>
+                <p className='text-[16px] font-bold'>{productData.title}</p>
+                <p> <span className='font-bold'>Price:</span> {productData.price}Tk</p>
             </div>
-            <div className='font-bold' >
+            <div className='font-bold mt-2' >
                 <Link
                     onClick={(e) => e.stopPropagation()}
                     to={"/payment/" + productData?._id}
-                    className='inline-block p-3 bg-3 rounded-md mr-4 shadow-first'
+                    className='inline-block p-2 bg-3 rounded-md mr-4 shadow-first'
                 >
                     <p className='text-[white]'>Buy Now</p>
                 </Link>
@@ -31,7 +31,7 @@ const ProductCard = ({ productData }) => {
                         e.stopPropagation()
                         dispatch(addToCart(productData))
                     }}
-                    className='p-3 bg-2 rounded-md'
+                    className='p-2 bg-2 rounded-md'
                 >
                     Add to Cart+
                 </button>

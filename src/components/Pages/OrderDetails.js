@@ -2,20 +2,21 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchOrder } from '../../features/orderSlice';
+import Spinner from '../main-components/Spinner';
 
 
 const OrderDetails = () => {
     const { selectedOrder: orderDetails } = useSelector(state => state.orders)
     const dispatch = useDispatch()
     const { orderID } = useParams()
-    useEffect(() => { dispatch(fetchOrder(orderID)) }, [orderID])
+    useEffect(() => { dispatch(fetchOrder(orderID)) }, [])
     if (!orderDetails.productData) {
         return;
     }
     return (
         <div className='flex mx-4'>
             <div className='shrink-0 w-[400px] bg-[red]'>
-                <img className='w-[full] bg-green-500' src={orderDetails.productData?.thumbnail} alt="" />
+                <img className='w-[full] bg-green-500' src={orderDetails.productData?.image} alt="" />
             </div>
             <div className='ml-4'>
                 <p className='text-[25px] font-bold'>{orderDetails.productData?.title}</p>

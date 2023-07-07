@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
 import { fetchOrder, updateOrderStatus } from '../../features/orderSlice';
+import Spinner from '../main-components/Spinner';
 
 const AdminOrderDetails = () => {
     const [toggle, setToggle] = useState(true)
     const { orderID } = useParams()
     const dispatch = useDispatch()
-    const { selectedOrder: orderDetails } = useSelector(state => state.admin)
+    const { selectedOrder: orderDetails } = useSelector(state => state.orders)
     useEffect(() => { dispatch(fetchOrder(orderID)) }, [orderID])
     const updateStatus = (e) => {
         e.preventDefault()
@@ -15,12 +16,12 @@ const AdminOrderDetails = () => {
         dispatch(updateOrderStatus({ orderID, text: e.target.orderStatus.value }))
         // dispatch(fetchOrder(orderID))
     }
-    if (!orderDetails) {
+    if (!orderDetails.productData) {
         return
     }
     return (
         <div className='grid grid-cols-2'>
-            <img src={orderDetails?.productData.images[0]} className='block' alt="" />
+            <img src={orderDetails?.productData.images} className='block' alt="" />
             <div className='ml-4'>
                 <p className='text-[25px] font-bold'>{orderDetails.productData.title}</p>
                 <p><span className='my-4 font-bold'>Description</span>{orderDetails.productData.description}</p>

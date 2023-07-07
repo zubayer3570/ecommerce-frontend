@@ -23,17 +23,33 @@ import AddProduct from './components/Pages/AddProduct';
 import Spinner from './components/main-components/Spinner';
 import { fetchAllOrders } from './features/orderSlice';
 import SearchPage from './components/Pages/SearchPage';
-
-const savedUser = JSON.parse(localStorage.getItem("soundex-user-credentials"))
+import { auth } from './init.firebase'
+import { onAuthStateChanged } from 'firebase/auth'
+import RequireUser from './components/main-components/RequireUser';
 
 function App() {
   const dispatch = useDispatch()
-  const {loggedInUser} = useSelector(state => state.user)
+  const { loggedInUser } = useSelector(state => state.user)
   const loading = useSelector(state => state.loading)
+
+
+
   useEffect(() => {
-    dispatch(userLogin(savedUser))
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(userLogin({
+          email: user.email
+        }))
+      }
+    })
+  }, [])
+
+
+
+  useEffect(() => {
     dispatch(fetchAllProducts())
   }, [])
+  
   useEffect(() => {
     if (loggedInUser?.admin) {
       dispatch(fetchAllOrders())
@@ -41,9 +57,11 @@ function App() {
   }, [loggedInUser])
   const footerState = useSelector(state => state.footer)
 
-  // if (loading) {
-  //   return <Spinner />
-  // }
+  if (loading) {
+    return <Spinner />
+  }
+
+
   return (
     <>
       <ToastContainer />
@@ -52,11 +70,11 @@ function App() {
         <Route path='/cart' element={<Cart />}></Route>
         <Route path='/search-results' element={<SearchResults />}></Route>
         <Route path='/product/:productID' element={<Product />}></Route>
-        <Route path='/payment/:productID' element={<Payment />}></Route>
+        <Route path='/payment/:productID' element={<RequireUser><Payment /></RequireUser>}></Route>
         <Route path='/signup' element={<Signup />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/signup' element={<Signup />}></Route>
-        <Route path='/checkout' element={<Checkout />}></Route>
+        <Route path='/checkout' element={<RequireUser><Checkout /></RequireUser>}></Route>
         <Route path='/profile' element={<ProfilePage />}></Route>
         <Route path='/my-orders' element={<MyOrders />}></Route>
         <Route path='/order-details/:orderID' element={<OrderDetails />}></Route>

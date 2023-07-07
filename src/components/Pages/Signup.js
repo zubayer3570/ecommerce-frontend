@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom';
 import { userSignup } from '../../features/userSlice';
+import Spinner from '../main-components/Spinner';
 
 const Signup = () => {
-    const data = useSelector(state => state.user)
+    const { loggedInUser } = useSelector(state => state.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const getFile = (e) => {
@@ -34,7 +35,7 @@ const Signup = () => {
         formData.append("password", password)
         dispatch(userSignup(formData))
     }
-    useEffect(() => { data?._id && navigate("/") }, [data])
+    useEffect(() => { loggedInUser?._id && navigate("/") }, [loggedInUser])
     return (
         <div className='flex justify-center' >
             <form onSubmit={signUpUser} encType="multipart/form-data" className='w-[80%] lg:w-[40%]'>
@@ -50,7 +51,7 @@ const Signup = () => {
                 <input type="text" name='email' className='my-2 px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full' />
                 <label className='font-bold'>Password</label>
                 <input type="password" name='password' className='my-2 px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full' />
-                <div style={{ color: "red" }}>{data?._id ? "" : data?.message}</div>
+                <div style={{ color: "red" }}>{loggedInUser?._id ? "" : loggedInUser?.message}</div>
                 <input type="submit" value='Sign Up' className='cursor-pointer bg-3 hover:bg-blue-700 text-[white] font-bold py-2 px-4 rounded' />
                 <p className='my-2'>
                     Already have an account?<Link to={"/login"} className='font-bold text-[blue]'> Login</Link>

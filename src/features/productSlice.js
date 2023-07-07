@@ -2,21 +2,23 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { setLoadingState } from "./loadingSlice";
 
-export const fetchProduct = createAsyncThunk("fech-product", async (producID) => {
-    const { data } = await axios.get("https://ecommerce-backend-d4lh.onrender.com/fetch-product/" + producID)
+export const fetchProduct = createAsyncThunk("fech-product", async (producID, { dispatch }) => {
+    const { data } = await axios.get("http://192.168.1.104:5000/fetch-product/" + producID)
+    if (data) {
+        console.log("hi")
+    }
     return data;
 })
 export const fetchAllProducts = createAsyncThunk("fech-all-product", async (param, { dispatch }) => {
-    dispatch(setLoadingState(true))
-    const { data } = await axios.get("https://ecommerce-backend-d4lh.onrender.com/all-products")
-    dispatch(setLoadingState(false))
+    const { data } = await axios.get("http://192.168.1.104:5000/all-products")
     return data;
 })
 
-export const addProduct = createAsyncThunk("addProduct", async (data, {dispatch}) => {
-    dispatch(setLoadingState(true))
-    const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/add-product", data)
-    dispatch(setLoadingState(false))
+export const addProduct = createAsyncThunk("addProduct", async (data, { dispatch }) => {
+    const res = await axios.post("http://192.168.1.104:5000/add-product", data,
+    {
+        headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
+    })
     return res.data
 })
 
