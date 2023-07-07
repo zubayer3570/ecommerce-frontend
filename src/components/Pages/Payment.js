@@ -31,7 +31,7 @@ const Payment = () => {
         navigate("/checkout", { state: { email: loggedInUser.email, productData, quantity } })
     }
 
-    if (loading) { console.log("payment")
+    if (loading) {
         return <Spinner />
     }
     if (!productData) {

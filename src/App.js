@@ -30,7 +30,6 @@ import RequireUser from './components/main-components/RequireUser';
 function App() {
   const dispatch = useDispatch()
   const { loggedInUser } = useSelector(state => state.user)
-  const loading = useSelector(state => state.loading)
 
 
 
@@ -56,10 +55,6 @@ function App() {
     }
   }, [loggedInUser])
   const footerState = useSelector(state => state.footer)
-
-  if (loading) {
-    return <Spinner />
-  }
 
 
   return (

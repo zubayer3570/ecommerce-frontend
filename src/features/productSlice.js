@@ -4,9 +4,6 @@ import { setLoadingState } from "./loadingSlice";
 
 export const fetchProduct = createAsyncThunk("fech-product", async (producID, { dispatch }) => {
     const { data } = await axios.get("https://ecommerce-backend-d4lh.onrender.com/fetch-product/" + producID)
-    if (data) {
-        console.log("hi")
-    }
     return data;
 })
 export const fetchAllProducts = createAsyncThunk("fech-all-product", async (param, { dispatch }) => {
