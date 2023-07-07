@@ -13,7 +13,7 @@ const Checkout = () => {
     const [clientSecret, setClientSecret] = useState(undefined)
     useEffect(() => {
         axios
-            .post("http://192.168.1.104:5000/create-payment-intent", data)
+            .post("https://ecommerce-backend-d4lh.onrender.com/create-payment-intent", data)
             .then(res => setClientSecret(res.data.client_secret))
     }, [])
     return (

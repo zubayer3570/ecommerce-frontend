@@ -9,7 +9,7 @@ export const userSignup = createAsyncThunk("signup", async (data, { dispatch }) 
     try {
         const { user } = await createUserWithEmailAndPassword(auth, data.get("email"), data.get("password"))
         await sendEmailVerification(user)
-        const res = await axios.post("http://192.168.1.104:5000/signup", data);
+        const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/signup", data);
         return res.data;
     } catch (err) {
         return { message: err.message }
@@ -21,7 +21,7 @@ export const userLogin = createAsyncThunk("login", async (data, { dispatch }) =>
         if (!auth.currentUser) {
             await signInWithEmailAndPassword(auth, data.email, data.password)
         }
-        const res = await axios.post("http://192.168.1.104:5000/login", data);
+        const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/login", data);
         localStorage.removeItem("accessToken")
         localStorage.setItem("accessToken", JSON.stringify({ jwt: res.data.jwt }))
         return res.data;
@@ -33,7 +33,7 @@ export const userLogin = createAsyncThunk("login", async (data, { dispatch }) =>
 
 
 export const fetchAllUsers = createAsyncThunk("all-users", async (data, { dispatch }) => {
-    const res = await axios.get("http://192.168.1.104:5000/all-users",
+    const res = await axios.get("https://ecommerce-backend-d4lh.onrender.com/all-users",
         {
             headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
         })

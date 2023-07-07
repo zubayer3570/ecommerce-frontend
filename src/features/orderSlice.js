@@ -4,14 +4,14 @@ import { setLoadingState } from "./loadingSlice";
 
 
 export const fetchAllOrders = createAsyncThunk("all-orders", async (data) => {
-    const res = await axios.get("http://192.168.1.104:5000/all-orders",
+    const res = await axios.get("https://ecommerce-backend-d4lh.onrender.com/all-orders",
         {
             headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
         })
     return res.data.allOrders
 })
 export const fetchOrder = createAsyncThunk("fetch-order", async (orderID) => {
-    const res = await axios.get("http://192.168.1.104:5000/fetch-order/" + orderID,
+    const res = await axios.get("https://ecommerce-backend-d4lh.onrender.com/fetch-order/" + orderID,
     {
         headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
     })
@@ -19,7 +19,7 @@ export const fetchOrder = createAsyncThunk("fetch-order", async (orderID) => {
 })
 
 export const updateOrderStatus = createAsyncThunk("updating-status", async (data) => {
-    const res = await axios.post("http://192.168.1.104:5000/update-order-status", data,
+    const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/update-order-status", data,
     {
         headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
     })
@@ -27,12 +27,12 @@ export const updateOrderStatus = createAsyncThunk("updating-status", async (data
 })
 
 export const fetchMyOrders = createAsyncThunk("fetchMyOrders", async (data) => {
-    const { data: ordersData } = await axios.post("http://192.168.1.104:5000/my-orders", { email: data })
+    const { data: ordersData } = await axios.post("https://ecommerce-backend-d4lh.onrender.com/my-orders", { email: data })
     return ordersData;
 })
 
 export const addOrder = createAsyncThunk("addOrder", async (data) => {
-    const { data: addedOrder } = await axios.post("http://192.168.1.104:5000/add-order", data,
+    const { data: addedOrder } = await axios.post("https://ecommerce-backend-d4lh.onrender.com/add-order", data,
     {
         headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
     })
@@ -40,7 +40,7 @@ export const addOrder = createAsyncThunk("addOrder", async (data) => {
 })
 
 export const cancelOrder = createAsyncThunk("cancelOrder", async (data) => {
-    const { data: canceledOrder } = await axios.post("http://192.168.1.104:5000/cancel-order", data,
+    const { data: canceledOrder } = await axios.post("https://ecommerce-backend-d4lh.onrender.com/cancel-order", data,
     {
         headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
     })
