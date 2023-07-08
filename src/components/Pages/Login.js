@@ -9,7 +9,7 @@ import Spinner from '../main-components/Spinner';
 
 
 const Login = () => {
-    const { loggedInUser } = useSelector(state => state.user);
+    const { loggedInUser, loading } = useSelector(state => state.user);
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const loginUserHandler = (e) => {
@@ -19,6 +19,9 @@ const Login = () => {
         dispatch(userLogin({ email, password }));
     }
     useEffect(() => { loggedInUser?._id && navigate("/") }, [loggedInUser])
+    if(loading){
+        return <Spinner/>
+    }
     return (
         <div className='flex flex-col items-center' >
             <form onSubmit={loginUserHandler} className='w-[80%] lg:w-[40%]'>

@@ -20,7 +20,6 @@ import ManageAllOders from './components/Pages/ManageAllOders';
 import AdminOrderDetails from './components/Pages/AdminOrderDetails';
 import { fetchAllProducts } from './features/productSlice';
 import AddProduct from './components/Pages/AddProduct';
-import Spinner from './components/main-components/Spinner';
 import { fetchAllOrders } from './features/orderSlice';
 import SearchPage from './components/Pages/SearchPage';
 import { auth } from './init.firebase'
@@ -34,6 +33,7 @@ function App() {
 
 
   useEffect(() => {
+    dispatch(fetchAllProducts())
     onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(userLogin({
@@ -41,21 +41,13 @@ function App() {
         }))
       }
     })
-  }, [])
-
-
-
-  useEffect(() => {
-    dispatch(fetchAllProducts())
-  }, [])
-
-  useEffect(() => {
     if (loggedInUser?.admin) {
       dispatch(fetchAllOrders())
     }
-  }, [loggedInUser])
+  }, [])
 
   const footerState = useSelector(state => state.footer)
+
 
 
   return (

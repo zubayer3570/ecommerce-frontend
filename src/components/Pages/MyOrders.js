@@ -4,7 +4,10 @@ import MyOrdersCard from '../main-components/MyOrdersCard';
 import Spinner from '../main-components/Spinner';
 
 const MyOrders = () => {
-    const {myOrders} = useSelector(state => state.orders)
+    const { myOrders, loading } = useSelector(state => state.orders)
+    if (loading) {
+        return <Spinner />
+    }
     return (
         <div className='grid lg:grid-cols-4 mx-4 gap-2'>
             {

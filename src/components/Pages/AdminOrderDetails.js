@@ -8,13 +8,16 @@ const AdminOrderDetails = () => {
     const [toggle, setToggle] = useState(true)
     const { orderID } = useParams()
     const dispatch = useDispatch()
-    const { selectedOrder: orderDetails } = useSelector(state => state.orders)
+    const { selectedOrder: orderDetails, loading } = useSelector(state => state.orders)
     useEffect(() => { dispatch(fetchOrder(orderID)) }, [orderID])
     const updateStatus = (e) => {
         e.preventDefault()
         setToggle(!toggle)
         dispatch(updateOrderStatus({ orderID, text: e.target.orderStatus.value }))
         // dispatch(fetchOrder(orderID))
+    }
+    if (loading) {
+        return <Spinner />
     }
     if (!orderDetails.productData) {
         return

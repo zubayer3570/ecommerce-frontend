@@ -3,12 +3,10 @@ import cartReducer from '../features/cartSlice'
 import userReducer from '../features/userSlice'
 import productReducer from '../features/productSlice'
 import orderReducer from '../features/orderSlice'
-import loadingReducer from '../features/loadingSlice'
 import footerReducer from '../features/footerSlice'
 
-export default configureStore({
+const store = configureStore({
     reducer: {
-        loading: loadingReducer,
         product: productReducer,
         orders: orderReducer,
         cart: cartReducer,
@@ -16,3 +14,5 @@ export default configureStore({
         footer: footerReducer
     }
 })
+
+export default store

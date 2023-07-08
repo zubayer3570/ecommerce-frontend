@@ -5,12 +5,15 @@ import { useNavigate } from 'react-router-dom';
 import Spinner from '../main-components/Spinner';
 
 const ProfilePage = () => {
-    const { loggedInUser } = useSelector(state => state.user)
+    const { loggedInUser, loading } = useSelector(state => state.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const logoutUser = () => {
         dispatch(logout())
         navigate("/");
+    }
+    if(loading){
+        return <Spinner />
     }
     return (
         <div>

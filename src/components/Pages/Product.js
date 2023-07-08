@@ -3,12 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { addToCart } from '../../features/cartSlice';
 import { fetchProduct } from '../../features/productSlice';
+import Spinner from '../main-components/Spinner';
 
 const Product = () => {
     const { productID } = useParams()
     const dispatch = useDispatch()
-    const { selectedProduct: productData } = useSelector(state => state.product)
+    const { selectedProduct: productData, loading } = useSelector(state => state.product)
     useEffect(() => { dispatch(fetchProduct(productID)) }, [])
+    if(loading){
+        return <Spinner />
+    }
     return (
         <>
             <div className='flex flex-col lg:flex-row mx-4'>

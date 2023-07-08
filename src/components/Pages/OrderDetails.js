@@ -6,10 +6,13 @@ import Spinner from '../main-components/Spinner';
 
 
 const OrderDetails = () => {
-    const { selectedOrder: orderDetails } = useSelector(state => state.orders)
+    const { selectedOrder: orderDetails, loading } = useSelector(state => state.orders)
     const dispatch = useDispatch()
     const { orderID } = useParams()
     useEffect(() => { dispatch(fetchOrder(orderID)) }, [])
+    if (loading) {
+        return <Spinner />
+    }
     if (!orderDetails.productData) {
         return;
     }

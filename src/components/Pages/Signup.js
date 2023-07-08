@@ -5,7 +5,7 @@ import { userSignup } from '../../features/userSlice';
 import Spinner from '../main-components/Spinner';
 
 const Signup = () => {
-    const { loggedInUser } = useSelector(state => state.user)
+    const { loggedInUser, loading } = useSelector(state => state.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const getFile = (e) => {
@@ -36,6 +36,9 @@ const Signup = () => {
         dispatch(userSignup(formData))
     }
     useEffect(() => { loggedInUser?._id && navigate("/") }, [loggedInUser])
+    if (loading) {
+        return <Spinner />
+    }
     return (
         <div className='flex justify-center' >
             <form onSubmit={signUpUser} encType="multipart/form-data" className='w-[80%] lg:w-[40%]'>

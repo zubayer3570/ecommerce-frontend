@@ -42,7 +42,7 @@ export default function CheckoutForm({ orderData }) {
       elements,
       // confirmParams: {
       //   // Make sure to change this to your payment completion page
-      //   return_url: "https://localhost:5000:3000",
+      //   return_url: "http://localhost:3000",
       // },
       redirect: "if_required"
     });

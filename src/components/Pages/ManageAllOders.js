@@ -4,7 +4,10 @@ import AdminOrderCard from '../main-components/AdminOrderCard';
 import Spinner from '../main-components/Spinner';
 
 const ManageAllOders = () => {
-    const { allOrders } = useSelector(state => state.orders)
+    const { allOrders, loading } = useSelector(state => state.orders)
+    if (loading) {
+        return <Spinner />
+    }
     return (
         <>
             <div className='grid grid-cols-3 font-bold'>
