@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { addToCart } from '../../features/cartSlice';
 import { fetchProduct } from '../../features/productSlice';
-import Spinner from '../main-components/Spinner';
 
 const Product = () => {
     const { productID } = useParams()
@@ -12,9 +11,9 @@ const Product = () => {
     useEffect(() => { dispatch(fetchProduct(productID)) }, [])
     return (
         <>
-            <div className='flex mx-4'>
-                <div className='shrink-0 w-[400px] bg-[red]'>
-                    <img className='w-[full] bg-green-500' src={productData.image} alt="" />
+            <div className='flex flex-col lg:flex-row mx-4'>
+                <div className='shrink-0 w-full lg:w-[400px]'>
+                    <img className='bg-green-500' src={productData.image} alt="" />
                 </div>
                 <div className='ml-4'>
                     <p className='text-[25px] font-bold'>{productData?.title}</p>

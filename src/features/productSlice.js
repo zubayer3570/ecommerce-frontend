@@ -1,17 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { setLoadingState } from "./loadingSlice";
 
-export const fetchProduct = createAsyncThunk("fech-product", async (producID, { dispatch }) => {
+export const fetchProduct = createAsyncThunk("fech-product", async (producID) => {
     const { data } = await axios.get("https://ecommerce-backend-d4lh.onrender.com/fetch-product/" + producID)
     return data;
 })
-export const fetchAllProducts = createAsyncThunk("fech-all-product", async (param, { dispatch }) => {
-    const { data } = await axios.get("https://ecommerce-backend-d4lh.onrender.com/all-products")
-    return data;
+export const fetchAllProducts = createAsyncThunk("fech-all-product", async () => {
+    const res = await axios.get("https://ecommerce-backend-d4lh.onrender.com/all-products")
+    return res.data;
 })
 
-export const addProduct = createAsyncThunk("addProduct", async (data, { dispatch }) => {
+export const addProduct = createAsyncThunk("addProduct", async (data) => {
     const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/add-product", data,
     {
         headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }

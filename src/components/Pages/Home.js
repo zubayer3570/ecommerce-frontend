@@ -15,12 +15,12 @@ const Home = () => {
     return (
         <>
             <HomePageBanner />
-            <TopProducts />
-            <p className='text-[30px] font-bold text-3 text-center mt-12 mb-6'>All Products</p>
+            <p className='text-[30px] font-bold text-3 text-center mt-12 mb-6'>Products</p>
             <AllProducts />
-            <FacebookProvider appId='1369564030289731'>
+            <TopProducts />
+            {/* <FacebookProvider appId='1369564030289731'>
                 <CustomChat pageId='101280129700771' />
-            </FacebookProvider>
+            </FacebookProvider> */}
         </>
     );
 };

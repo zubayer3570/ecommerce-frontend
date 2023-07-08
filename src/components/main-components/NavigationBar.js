@@ -12,7 +12,11 @@ const NavigationBar = () => {
     const { myOrders } = useSelector(state => state.orders)
     const cartItem = useSelector(state => state.cart)
     const navigate = useNavigate()
-    useEffect(() => { dispatch(fetchMyOrders(loggedInUser?.email)) }, [loggedInUser])
+    useEffect(() => {
+        if (loggedInUser._id) {
+            dispatch(fetchMyOrders(loggedInUser._id.email))
+        }
+    }, [loggedInUser])
     return (
 
         <div className='sticky top-0 z-[2]'>

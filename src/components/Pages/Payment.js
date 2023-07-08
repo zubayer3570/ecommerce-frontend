@@ -5,7 +5,6 @@ import { fetchProduct } from '../../features/productSlice';
 import Spinner from '../main-components/Spinner';
 
 const Payment = () => {
-    const loading = useSelector(state => state.loading)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const quantityInput = useRef()
@@ -30,17 +29,13 @@ const Payment = () => {
     const goToCheckout = () => {
         navigate("/checkout", { state: { email: loggedInUser.email, productData, quantity } })
     }
-
-    if (loading) {
-        return <Spinner />
-    }
     if (!productData) {
         return;
     }
     return (
         <div className='flex mx-4'>
-            <div className='shrink-0 w-[400px] bg-[red]'>
-                <img className='w-[full] bg-green-500' src={productData.image} alt="" />
+            <div className='shrink-0 w-full'>
+                <img className='bg-green-500' src={productData.image} alt="" />
             </div>
             <div className='ml-4'>
                 <p className='text-[25px] font-bold'>{productData.title}</p>
