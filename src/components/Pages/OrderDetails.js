@@ -9,7 +9,9 @@ const OrderDetails = () => {
     const { selectedOrder: orderDetails, loading } = useSelector(state => state.orders)
     const dispatch = useDispatch()
     const { orderID } = useParams()
+
     useEffect(() => { dispatch(fetchOrder(orderID)) }, [])
+    
     if (loading) {
         return <Spinner />
     }
@@ -17,19 +19,22 @@ const OrderDetails = () => {
         return;
     }
     return (
-        <div className='flex mx-4'>
-            <div className='shrink-0 w-[400px] bg-[red]'>
-                <img className='w-[full] bg-green-500' src={orderDetails.productData?.image} alt="" />
+        <>
+            <p className='text-[25px] font-bold text-center my-6'>Your Order Details</p>
+            <div className='flex mx-4'>
+                <div className='shrink-0 w-[400px] bg-[red]'>
+                    <img className='w-[full] bg-green-500' src={orderDetails.productData?.image} alt="" />
+                </div>
+                <div className='ml-4'>
+                    <p className='text-[25px] font-bold'>{orderDetails.productData?.title}</p>
+                    <p><span className='my-4 font-bold'>Description</span>{orderDetails.productData?.description}</p>
+                    <p><span className='my-4 font-bold'>Quantity: </span>{orderDetails.quantity} piece</p>
+                    <p><span className='my-4 font-bold'>Total: </span>{orderDetails.totalAmount}tk</p>
+                    <p><span className='my-4 font-bold'>Ordering Date: </span>{orderDetails.orderDate}</p>
+                    <p><span className='my-4 font-bold'>Delivery Status: </span> {orderDetails.shippingStatus} </p>
+                </div>
             </div>
-            <div className='ml-4'>
-                <p className='text-[25px] font-bold'>{orderDetails.productData?.title}</p>
-                <p><span className='my-4 font-bold'>Description</span>{orderDetails.productData?.description}</p>
-                <p><span className='my-4 font-bold'>Quantity: </span>{orderDetails.quantity} piece</p>
-                <p><span className='my-4 font-bold'>Total: </span>{orderDetails.totalAmount}tk</p>
-                <p><span className='my-4 font-bold'>Ordering Date: </span>{orderDetails.orderDate}</p>
-                <p><span className='my-4 font-bold'>Delivery Status: </span> {orderDetails.shippingStatus} </p>
-            </div>
-        </div>
+        </>
     );
 };
 

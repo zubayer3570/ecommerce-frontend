@@ -12,13 +12,16 @@ const Login = () => {
     const { loggedInUser, loading } = useSelector(state => state.user);
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    
+    useEffect(() => { loggedInUser?._id && navigate("/") }, [loggedInUser])
+
     const loginUserHandler = (e) => {
         e.preventDefault()
         const email = e.target.email.value
         const password = e.target.password.value
         dispatch(userLogin({ email, password }));
     }
-    useEffect(() => { loggedInUser?._id && navigate("/") }, [loggedInUser])
+
     if(loading){
         return <Spinner/>
     }

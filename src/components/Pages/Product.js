@@ -10,11 +10,14 @@ const Product = () => {
     const dispatch = useDispatch()
     const { selectedProduct: productData, loading } = useSelector(state => state.product)
     useEffect(() => { dispatch(fetchProduct(productID)) }, [])
+
     if(loading){
         return <Spinner />
     }
+    
     return (
         <>
+        <p className='text-[25px] font-bold text-center my-6'>Product Details</p>
             <div className='flex flex-col lg:flex-row mx-4'>
                 <div className='shrink-0 w-full lg:w-[400px]'>
                     <img className='bg-green-500' src={productData.image} alt="" />

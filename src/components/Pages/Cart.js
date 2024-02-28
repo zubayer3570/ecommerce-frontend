@@ -8,11 +8,14 @@ const Cart = () => {
     const dispatch = useDispatch()
     // const [height, setHeight] = useState(document.getElementById("height")?.offsetHeight)
     const cart = useSelector(state => state.cart)
+
     useEffect(() => {
         dispatch(updateFooter(document.getElementById("height")?.offsetHeight))
     }, [cart])
+
     return (
         <>
+            <p className='text-[25px] font-bold text-center my-4'>Cart</p>
             <div className='mx-4' id='height'>
                 {
                     cart?.map(cartItem => <CartCard key={cartItem._id} data={cartItem} />)

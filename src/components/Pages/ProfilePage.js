@@ -8,13 +8,16 @@ const ProfilePage = () => {
     const { loggedInUser, loading } = useSelector(state => state.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
     const logoutUser = () => {
         dispatch(logout())
         navigate("/");
     }
+
     if(loading){
         return <Spinner />
     }
+    
     return (
         <div>
             <p className='text-[25px] text-center my-8 font-bold'>My Profile</p>

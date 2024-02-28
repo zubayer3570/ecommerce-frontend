@@ -41,10 +41,13 @@ function App() {
         }))
       }
     })
+  }, [])
+
+  useEffect(() => {
     if (loggedInUser?.admin) {
       dispatch(fetchAllOrders())
     }
-  }, [])
+  }, [loggedInUser])
 
   const footerState = useSelector(state => state.footer)
 

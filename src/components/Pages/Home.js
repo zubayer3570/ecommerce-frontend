@@ -12,10 +12,13 @@ import Spinner from '../main-components/Spinner';
 const Home = () => {
     const dispatch = useDispatch()
     const { allProducts } = useSelector(state => state.product)
+
     useEffect(() => { dispatch(updateFooter(document.getElementById("height")?.offsetHeight)) }, [allProducts])
+
     if (!allProducts.length) {
         return <Spinner />
     }
+    
     return (
         <>
             <HomePageBanner />

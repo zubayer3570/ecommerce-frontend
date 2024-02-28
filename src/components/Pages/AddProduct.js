@@ -7,6 +7,7 @@ import Spinner from '../main-components/Spinner';
 const AddProduct = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
     const uploadProductPic = (e) => {
         e.preventDefault()
         document.getElementById("getFile").click()
@@ -37,6 +38,7 @@ const AddProduct = () => {
         dispatch(addProduct(formData))
         navigate("/")
     }
+    
     return (
         <>
             <p className='font-bold text-[25px] my-8 text-center'>Add a Prouct To Database</p>

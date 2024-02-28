@@ -13,12 +13,15 @@ const Payment = () => {
     const { loggedInUser } = useSelector(state => state.user)
     const { selectedProduct: productData, loading } = useSelector(state => state.product)
     const [grandTotal, setGrandTotal] = useState(productData?.price)
+
     useEffect(() => {
         dispatch(fetchProduct(productID))
     }, [])
-    if(loading){
+
+    if (loading) {
         return <Spinner />
     }
+
     const updateQuantity = (action) => {
         const inputValue = parseInt(quantityInput.current.value)
         if (action === "increment") quantityInput.current.value = inputValue + 1
@@ -30,12 +33,14 @@ const Payment = () => {
     const goToCheckout = () => {
         navigate("/checkout", { state: { email: loggedInUser.email, productData, quantity } })
     }
+
     if (!productData) {
         return;
     }
+
     return (
-        <div className='flex mx-4'>
-            <div className='shrink-0'>
+        <div className='flex flex-col lg:flex-row mx-4'>
+            <div className='shrink-0 w-full lg:w-[400px]'>
                 <img className='w-full' src={productData.image} alt="" />
             </div>
             <div className='ml-4'>
