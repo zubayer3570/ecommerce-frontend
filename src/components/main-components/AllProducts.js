@@ -19,8 +19,10 @@ const AllProducts = () => {
         <>
 
 
-            <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 mx-4'>
-                {allProducts?.slice((paginationState - 1) * 8, (paginationState) * 8).map(product => <ProductCard productData={product} key={product._id} />)}
+            <div className='w-full flex justify-center'>
+                <div className='grid grid-cols-2 lg:grid-cols-5 gap-2 lg:gap-6 lg:mx-4 w-[95%] lg:w-[80%]'>
+                    {allProducts?.slice((paginationState - 1) * 10, (paginationState) * 10).map(product => <ProductCard productData={product} key={product._id} />)}
+                </div>
             </div>
             <div className='flex justify-center mt-8'>
                 {

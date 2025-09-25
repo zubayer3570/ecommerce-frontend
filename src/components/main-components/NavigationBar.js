@@ -20,9 +20,9 @@ const NavigationBar = () => {
     return (
 
         <div className='sticky top-0 z-[2]'>
-            <div className='flex justify-between items-center h-[50px] bg-3 font-bold text-[16px] rounded-md m-4 px-4'>
+            <div className='flex justify-between items-center h-[50px] bg-3 font-bold text-[16px] p-8'>
                 <div className='flex text-[white] items-center'>
-                    <Link to='/' >Soundex</Link>
+                    <Link to='/' className='text-[18px]' >Soundex</Link>
                 </div>
 
                 <div className='hidden lg:block grow px-8'>
@@ -45,7 +45,6 @@ const NavigationBar = () => {
                                     }
                                 </div>
                                 <Link to={'/add-product'} className='ml-2 mr-8'>Add Product</Link>
-
                             </>
 
                             :
@@ -83,18 +82,18 @@ const NavigationBar = () => {
                 </div>
                 <div className='flex items-center bg-red-500'>
                     <img src="/search-icon-white.svg" onClick={() => navigate('/search-page')} className='lg:hidden block mr-2' alt="" />
-                    <img src="/hamburger.svg" onClick={() => setHamState(!hamState)} className='lg:hidden block mr-2' alt="" />
                     {
                         loggedInUser?._id ?
-                            <div onClick={() => navigate("/profile")}>
+                        <div onClick={() => navigate("/profile")}>
                                 <img src={loggedInUser.proPic} className='h-[30px] w-[30px] rounded-full cursor-pointer' alt="" />
                             </div>
                             :
                             <div>
-                                <button onClick={() => navigate("/login")} className='mr-2 py-1 px-2 rounded-full bg-[white] text-[16px]'>Login</button>
-                                <button onClick={() => navigate("/signup")} className='py-1 px-2 rounded-full bg-[white] text-[16px]' >Register</button>
+                                <button onClick={() => navigate("/login")} className='px-2 rounded-full text-[white] '>Login</button>
+                                <button onClick={() => navigate("/signup")} className='px-2 rounded-full text-[white] ' >Register</button>
                             </div>
                     }
+                    <img src="/hamburger.svg" onClick={() => setHamState(!hamState)} className='lg:hidden block mr-2' alt="" />
                 </div>
                 {
                     hamState ?

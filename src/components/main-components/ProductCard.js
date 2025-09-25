@@ -9,20 +9,22 @@ const ProductCard = ({ productData }) => {
     return (
         <div
             onClick={() => navigate('/product/' + productData._id)}
-            className='w-full rounded-md cursor-pointer shadow-first p-3'
+            className='w-full rounded-md cursor-pointer shadow-first bg-[white] text-[0.8em]'
         >
-            <div className='h-[200px] overflow-hidden rounded-md mb-2'>
+            <div className='h-[200px] p-8 overflow-hidden rounded-md mb-2'>
                 <img src={productData.image} className="w-full" alt="" />
             </div>
-            <div>
-                <p className='text-[16px] font-bold'>{productData.title}</p>
-                <p> <span className='font-bold'>Price:</span> {productData.price}Tk</p>
+            <div className='h-[100px] flex flex-col justify-center px-4'>
+                <div>
+                    <p className='text-[18px] pt-4 font-bold'>{productData.title.length > 40 ? productData.title.slice(0,30) + "..." : productData.title}</p>
+                    <p className='text-center py-2 font-bold'> {productData.price}Tk</p>
+                </div>
             </div>
             <div className='font-bold mt-2' >
                 <Link
                     onClick={(e) => e.stopPropagation()}
                     to={"/payment/" + productData?._id}
-                    className='inline-block p-2 bg-3 rounded-md mr-4 shadow-first'
+                    className='inline-block p-3 bg-3 shadow-first w-[50%] text-center '
                 >
                     <p className='text-[white]'>Buy Now</p>
                 </Link>
@@ -31,9 +33,10 @@ const ProductCard = ({ productData }) => {
                         e.stopPropagation()
                         dispatch(addToCart(productData))
                     }}
-                    className='p-2 bg-2 rounded-md'
+                    className='p-3 bg-2 w-[50%]'
                 >
-                    Add to Cart+
+                    <span className='lg:hidden' >Cart+</span>
+                    <span className='hidden lg:block' >Add to Cart+</span>
                 </button>
             </div>
         </div>

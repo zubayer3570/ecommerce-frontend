@@ -8,7 +8,7 @@ import { Controller, Pagination } from 'swiper'
 import { Autoplay } from 'swiper'
 const HomePageBanner = () => {
     return (
-        <div className='mx-4 rounded-md overflow-hidden'>
+        <div className=' overflow-hidden'>
             <Swiper
                 pagination={{ clickable: true }}
                 modules={[Pagination, Autoplay, Controller]}

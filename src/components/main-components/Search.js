@@ -35,14 +35,14 @@ const Search = () => {
     }
 
     return (
-        <form onSubmit={searchProduct} className={"w-full relative"}>
-            <div className={searchSuggestions.length == 0 ? 'rounded-full flex overflow-hidden h-[30px] bg-[white]' : 'rounded-t-[15px] flex overflow-hidden h-[35px] bg-[white]'}>
-                <input ref={searchInput} onBlur={() => setSearchSuggestions([])} onChange={searchSuggestionProvider} type="text" className='flex-grow bg-gray-100 h-full px-4 outline-0 font-bold ' placeholder='Search...' />
-                <button>
+        <form onSubmit={searchProduct} className={"w-full relative flex justify-end"}>
+            <div className={"flex overflow-hidden h-[40px] bg-[white] justify-end w-[350px] " + (searchSuggestions.length == 0 ? 'rounded-full ' : 'rounded-t-[15px] h-[35px]')}>
+                <input ref={searchInput} onBlur={() => setSearchSuggestions([])} onChange={searchSuggestionProvider} type="text" className='w-full bg-gray-100 h-full px-4 outline-0 font-bold rounded-full' placeholder='Search...' />
+                <button className='bg-[white]' >
                     <img src="/search-icon.svg" className='scale-[0.75] mr-2' alt="" />
                 </button>
             </div>
-            <div className='absolute bg-[white] w-full rounded-b-xl'>
+            <div className='absolute mt-8 w-[350px] bg-[white] rounded-b-xl'>
                 <div className='px-4'>
                     {searchSuggestions.map(product => {
                         return (
