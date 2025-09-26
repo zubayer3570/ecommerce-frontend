@@ -14,13 +14,13 @@ const NavigationBar = () => {
     const navigate = useNavigate()
     useEffect(() => {
         if (loggedInUser._id) {
-            dispatch(fetchMyOrders(loggedInUser._id.email))
+            dispatch(fetchMyOrders(loggedInUser.email))
         }
     }, [loggedInUser])
     return (
 
-        <div className='sticky top-0 z-[2]'>
-            <div className='flex justify-between items-center h-[50px] bg-3 font-bold text-[16px] p-8'>
+        <div className='sticky top-0 z-[2] bg-3 '>
+            <div className='flex justify-between items-center h-[50px] font-bold text-[16px] p-8 lg:mx-[100px]'>
                 <div className='flex text-[white] items-center'>
                     <Link to='/' className='text-[18px]' >Soundex</Link>
                 </div>

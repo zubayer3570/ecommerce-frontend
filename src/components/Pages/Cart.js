@@ -16,10 +16,12 @@ const Cart = () => {
     return (
         <>
             <p className='text-[25px] font-bold text-center my-4'>Cart</p>
-            <div className='mx-4' id='height'>
-                {
-                    cart?.map(cartItem => <CartCard key={cartItem._id} data={cartItem} />)
-                }
+            <div className='flex justify-center' >
+                <div className='mx-4 lg:w-[70%]' id='height'>
+                    {
+                        cart?.map(cartItem => <CartCard key={cartItem._id} data={cartItem} />)
+                    }
+                </div>
             </div>
         </>
     );

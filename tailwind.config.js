@@ -12,8 +12,8 @@ module.exports = {
     // },
     colors: {
       '1': "#E4FBFF",
-      '2': "#B8B5FF",
-      '3': "#0E0E0E",
+      '2': "#E7F2EF",
+      '3': "#19183B",
       '4': "#EDEEF7",
     },
     extend: {

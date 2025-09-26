@@ -16,7 +16,7 @@ const CartCard = (props) => {
         dispatch(removeFromCart(props.data))
     }
     return (
-        <div onClick={() => navigate("/product/" + _id, { state: props.data })} className='grid grid-cols-5 lg:grid-cols-4 rounded-md bg-2 font-bold lg:text-[16px] p-2 mb-3 cursor-pointer'>
+        <div onClick={() => navigate("/product/" + _id, { state: props.data })} className='grid grid-cols-5 lg:grid-cols-4 rounded-md bg-[#6D94C5] font-bold lg:text-[16px] p-2 mb-3 cursor-pointer text-[white]'>
             <div className="flex items-center overflow-hidden lg:ml-8">
                 <img src={image} className='h-[50px] w-[50px]' alt="" />
             </div>
