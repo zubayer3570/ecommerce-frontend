@@ -1,11 +1,23 @@
+// new_zub
+
 import React from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom';
 import { addToCart } from '../../features/cartSlice';
+import { deleteProductThunk } from '../../features/productSlice';
 
 const ProductCard = ({ productData }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const { loggedInUser } = useSelector(state => state.user)
+
+    const handleDelete = () => {
+        const response = window.confirm("Are you sure to delete this product?")
+        if (response) {
+            dispatch(deleteProductThunk({ id: productData._id }))
+        }
+    }
+
     return (
         <div
             onClick={() => navigate('/product/' + productData._id)}
@@ -16,29 +28,51 @@ const ProductCard = ({ productData }) => {
             </div>
             <div className='h-[100px] flex flex-col justify-center px-4'>
                 <div>
-                    <p className='text-[18px] pt-4 font-bold'>{productData.title.length > 40 ? productData.title.slice(0,30) + "..." : productData.title}</p>
-                    <p className='text-center py-2 font-bold'> {productData.price}Tk</p>
+                    <p className='text-[18px] pt-4 font-bold'>{productData?.title.length > 40 ? productData.title.slice(0, 30) + "..." : productData.title}</p>
+                    <p className='text-center py-2 font-bold'> {productData?.price}Tk</p>
                 </div>
             </div>
-            <div className='font-bold mt-2' >
-                <Link
-                    onClick={(e) => e.stopPropagation()}
-                    to={"/payment/" + productData?._id}
-                    className='inline-block p-3 bg-3 shadow-first w-[50%] text-center '
-                >
-                    <p className='text-[white]'>Buy Now</p>
-                </Link>
-                <button
-                    onClick={(e) => {
-                        e.stopPropagation()
-                        dispatch(addToCart(productData))
-                    }}
-                    className='p-3 bg-2 w-[50%]'
-                >
-                    <span className='lg:hidden' >Cart+</span>
-                    <span className='hidden lg:block' >Add to Cart+</span>
-                </button>
-            </div>
+            {
+                loggedInUser.admin === true ?
+                    <div className='font-bold mt-2' >
+                        <Link
+                            onClick={(e) => e.stopPropagation()}
+                            to={"/update-product/" + productData?._id}
+                            className='inline-block p-3 bg-[orange] shadow-first w-[50%] text-center '
+                        >
+                            <p className='text-[white]' >Update</p>
+                        </Link>
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                dispatch(addToCart(productData))
+                            }}
+                            className='p-3 bg-[red] w-[50%]'
+                        >
+                            <span onClick={handleDelete} className='hidden lg:block' >Delete</span>
+                        </button>
+                    </div>
+                    :
+                    <div className='font-bold mt-2' >
+                        <Link
+                            onClick={(e) => e.stopPropagation()}
+                            to={"/payment/" + productData?._id}
+                            className='inline-block p-3 bg-3 shadow-first w-[50%] text-center '
+                        >
+                            <p className='text-[white]'>Buy Now</p>
+                        </Link>
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                dispatch(addToCart(productData))
+                            }}
+                            className='p-3 bg-2 w-[50%]'
+                        >
+                            <span className='lg:hidden' >Cart+</span>
+                            <span className='hidden lg:block' >Add to Cart+</span>
+                        </button>
+                    </div>
+            }
         </div>
     );
 };

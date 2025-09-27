@@ -24,7 +24,7 @@ const Home = () => {
             <HomePageBanner />
             <p className='text-[30px] font-bold text-3 text-center mt-12 mb-6'>Products</p>
             <AllProducts />
-            <TopProducts />
+            {/* <TopProducts /> */}
             <FacebookProvider appId='1369564030289731'>
                 <CustomChat pageId='101280129700771' />
             </FacebookProvider>

@@ -1,3 +1,5 @@
+// new_zub
+
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/Pages/Home';
 import SearchResults from './components/Pages/SearchResults';
@@ -25,6 +27,7 @@ import SearchPage from './components/Pages/SearchPage';
 import { auth } from './init.firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import RequireUser from './components/main-components/RequireUser';
+import UpdateProduct from './components/Pages/UpdateProduct';
 
 function App() {
   const dispatch = useDispatch()
@@ -73,6 +76,8 @@ function App() {
         <Route path='/admin-order-details/:orderID' element={<AdminOrderDetails />}></Route>
         <Route path='/add-product' element={<AddProduct />}></Route>
         <Route path='/search-page' element={<SearchPage />}></Route>
+
+        <Route path='/update-product/:productID' element={<UpdateProduct />}></Route>
       </Routes>
       <Footer position={footerState} />
     </>
