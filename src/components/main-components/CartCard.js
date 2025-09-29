@@ -20,7 +20,7 @@ const CartCard = (props) => {
             <div className="flex items-center overflow-hidden lg:ml-8">
                 <img src={image} className='h-[50px] w-[50px]' alt="" />
             </div>
-            <div className='flex items-center justify-center col-span-2 lg:col-span-1'><p>{title.substring(0, 30)}...</p></div>
+            <div className='flex items-center justify-center col-span-2 lg:col-span-1'><p>{title?.substring(0, 30)}...</p></div>
             <div className='hidden lg:flex items-center justify-center'><p>{price}tk</p></div>
 
 

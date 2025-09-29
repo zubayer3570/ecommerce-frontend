@@ -32,19 +32,50 @@ export const userLogin = createAsyncThunk("login", async (data) => {
     }
 })
 
+export const fetchUserThunk = createAsyncThunk("fetchUser", async (data) => {
+    try {
+        const res = await axios.post("http://localhost:5000/user-information", data, {
+            headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
+        });
+        return res.data;
+    } catch (err) {
+        return { message: err.message }
+    }
+})
 
-export const fetchAllUsers = createAsyncThunk("all-users", async (data) => {
-    const res = await axios.get("http://localhost:5000/all-users",
+export const fetchAllUsersThunk = createAsyncThunk("allUsers", async () => {
+    try {
+        console.log("fetching all users frontend")
+        const res = await axios.get("http://localhost:5000/all-users",
+            {
+                headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
+            })
+        return res.data
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+export const makeAdminThunk = createAsyncThunk("makeAdmin", async (data) => {
+    const res = await axios.post("http://localhost:5000/make-admin", data,
         {
             headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
         })
-    return res.data.allUsers
+    return res.data
+})
+
+export const deleteUserThunk = createAsyncThunk("deleteUser", async (data) => {
+    const res = await axios.post("http://localhost:5000/delete-user", data,
+        {
+            headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
+        })
+    return res.data
 })
 
 
 const userSlice = createSlice({
     name: "userSlice",
-    initialState: { loggedInUser: {}, allUsers: [], loading: false },
+    initialState: { loggedInUser: {}, allUsers: [], userInformation: {}, loading: false },
     reducers: {
         logout: (state) => {
             signOut(auth)
@@ -55,21 +86,43 @@ const userSlice = createSlice({
         builder.addCase(userSignup.fulfilled, (state, action) => {
             return { ...state, loggedInUser: action.payload, loading: false };
         })
+
         builder.addCase(userSignup.pending, (state, action) => {
             return { ...state, loading: true };
         })
 
         builder.addCase(userLogin.fulfilled, (state, action) => {
-            const data = action.payload
-            return { ...state, loggedInUser: data, loading: false };
+            return { ...state, loggedInUser: action.payload, loading: false };
         })
         builder.addCase(userLogin.pending, (state) => {
             return { ...state, loading: true };
         })
 
-        builder.addCase(fetchAllUsers.fulfilled, (state, action) => {
-            state.allUsers = action.payload
-            return { ...state, allUsers: action.payload };
+        builder.addCase(fetchAllUsersThunk.pending, (state, action) => {
+            return { ...state, loading: true };
+        })
+
+        builder.addCase(fetchUserThunk.fulfilled, (state, action) => {
+            return { ...state, userInformation: action.payload.userInfo, loading: false };
+        })
+
+        builder.addCase(fetchAllUsersThunk.fulfilled, (state, action) => {
+            return { ...state, allUsers: action.payload.allUsers, loading: false };
+        })
+
+        builder.addCase(makeAdminThunk.fulfilled, (state, action) => {
+            const newAllUsers = state.allUsers.map(user => {
+                if (user._id === action.payload.newAdmin._id) {
+                    return action.payload.newAdmin
+                }
+                return user
+            })
+            return { ...state, allUsers: newAllUsers, loading: false };
+        })
+
+        builder.addCase(deleteUserThunk.fulfilled, (state, action) => {
+            const remainingUsers = state.allUsers.filter(user => user._id !== action.payload.deletedUser._id)
+            return { ...state, allUsers: remainingUsers, loading: false };
         })
     }
 })

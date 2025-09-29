@@ -41,23 +41,23 @@ const AddProduct = () => {
     
     return (
         <>
-            <p className='font-bold text-[25px] my-8 text-center'>Add a Prouct To Database</p>
+            <p className='font-bold text-[25px] mt-20 mb-12 text-center'>Add a Prouct To Database</p>
             <div className='flex justify-center' >
                 <form onSubmit={addProductData} encType="multipart/form-data" className='w-[80%] lg:w-[40%]'>
                     <label className='font-bold'>Title</label>
                     <input type="text" name='title' className='my-2 px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full' />
-                    <div className='my-2'>
+                    <div className='my-4'>
                         <label className='font-bold'>Upload Product Photo</label>
                         <input type="file" id='getFile' name='productPic' onChange={fileNameUpdate} className='hidden' />
                         <button id="placeholderButton" onClick={uploadProductPic} className='bg-3 px-2 py-1 rounded-md font-bold text-[white] ml-2'>Upload</button>
                         <div id='error' className='text-red'></div>
                     </div>
                     <label className='font-bold'>Description</label>
-                    <input type="text" name='description' className='my-2 px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full' />
-                    <label className='font-bold'>Price</label>
+                    <textarea type="text" name='description' className='my-2 px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full h-[150px]' />
+                    <label className='font-bold'>Price (Taka)</label>
                     <input type="text" name='price' className='my-2 px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full' />
                     {/* <div style={{ color: "red" }}>{data?._id ? "" : data?.message}</div> */}
-                    <input type="submit" value='Add Product' className='cursor-pointer bg-3 hover:bg-blue-700 text-[white] font-bold py-2 px-4 rounded' />
+                    <input type="submit" value='Create Product' className='cursor-pointer bg-3 hover:bg-blue-700 text-[white] font-bold py-2 px-4 rounded' />
                 </form>
             </div>
         </>

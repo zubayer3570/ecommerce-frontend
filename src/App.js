@@ -17,7 +17,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { userLogin } from './features/userSlice';
+import { fetchAllUsersThunk, userLogin } from './features/userSlice';
 import ManageAllOders from './components/Pages/ManageAllOders';
 import AdminOrderDetails from './components/Pages/AdminOrderDetails';
 import { fetchAllProducts } from './features/productSlice';
@@ -28,6 +28,9 @@ import { auth } from './init.firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import RequireUser from './components/main-components/RequireUser';
 import UpdateProduct from './components/Pages/UpdateProduct';
+import ContactUs from './components/Pages/ContactUs';
+import AllUsers from './components/main-components/AllUsers';
+import UserInformationPage from './components/Pages/UserInformationPage';
 
 function App() {
   const dispatch = useDispatch()
@@ -64,20 +67,27 @@ function App() {
         <Route path='/cart' element={<Cart />}></Route>
         <Route path='/search-results' element={<SearchResults />}></Route>
         <Route path='/product/:productID' element={<Product />}></Route>
-        <Route path='/payment/:productID' element={<RequireUser><Payment /></RequireUser>}></Route>
         <Route path='/signup' element={<Signup />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/signup' element={<Signup />}></Route>
-        <Route path='/checkout' element={<RequireUser><Checkout /></RequireUser>}></Route>
         <Route path='/profile' element={<ProfilePage />}></Route>
-        <Route path='/my-orders' element={<MyOrders />}></Route>
         <Route path='/order-details/:orderID' element={<OrderDetails />}></Route>
-        <Route path='/all-orders' element={<ManageAllOders />}></Route>
-        <Route path='/admin-order-details/:orderID' element={<AdminOrderDetails />}></Route>
-        <Route path='/add-product' element={<AddProduct />}></Route>
         <Route path='/search-page' element={<SearchPage />}></Route>
+        <Route path='/contact-us' element={<ContactUs />}></Route>
 
+        {/* User Protected Routes */}
+        <Route path='/payment/:productID' element={<RequireUser><Payment /></RequireUser>}></Route>
+        <Route path='/my-orders' element={<RequireUser><MyOrders /></RequireUser>}></Route>
+        <Route path='/checkout' element={<RequireUser><Checkout /></RequireUser>}></Route>
+
+        {/* Admin Protected Routes */}
+        <Route path='/user-information/:userID' element={<UserInformationPage />}></Route>
+        <Route path='/all-orders' element={<RequireUser><ManageAllOders /></RequireUser>}></Route>
+        <Route path='/admin-order-details/:orderID' element={<RequireUser><AdminOrderDetails /></RequireUser>}></Route>
+        <Route path='/add-product' element={<RequireUser><AddProduct /></RequireUser>}></Route>
+        <Route path='/all-users' element={<RequireUser><AllUsers /></RequireUser>}></Route>
         <Route path='/update-product/:productID' element={<UpdateProduct />}></Route>
+
       </Routes>
       <Footer position={footerState} />
     </>

@@ -30,6 +30,7 @@ export const updateProductThunk = createAsyncThunk("updateProduct", async (data)
 })
 
 export const deleteProductThunk = createAsyncThunk("deleteProduct", async (data) => {
+    console.log("heeeeeeeeeeeeeeeeeeeeeeeee")
     const res = await axios.post("http://localhost:5000/delete-product", data,
         {
             headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }

@@ -32,46 +32,45 @@ const ProductCard = ({ productData }) => {
                     <p className='text-center py-2 font-bold'> {productData?.price}Tk</p>
                 </div>
             </div>
+            <div className='font-bold mt-2' >
+                <Link
+                    onClick={(e) => e.stopPropagation()}
+                    to={"/payment/" + productData?._id}
+                    className='inline-block p-3 bg-3 shadow-first w-[50%] text-center '
+                >
+                    <p className='text-[white]'>Buy Now</p>
+                </Link>
+                <button
+                    onClick={(e) => {
+                        e.stopPropagation()
+                        dispatch(addToCart(productData))
+                    }}
+                    className='p-3 bg-2 w-[50%]'
+                >
+                    <span className='lg:hidden' >Cart+</span>
+                    <span className='hidden lg:block' >Add to Cart+</span>
+                </button>
+            </div>
             {
-                loggedInUser.admin === true ?
-                    <div className='font-bold mt-2' >
-                        <Link
-                            onClick={(e) => e.stopPropagation()}
-                            to={"/update-product/" + productData?._id}
-                            className='inline-block p-3 bg-[orange] shadow-first w-[50%] text-center '
-                        >
-                            <p className='text-[white]' >Update</p>
-                        </Link>
-                        <button
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                dispatch(addToCart(productData))
-                            }}
-                            className='p-3 bg-[red] w-[50%]'
-                        >
-                            <span onClick={handleDelete} className='hidden lg:block' >Delete</span>
-                        </button>
-                    </div>
-                    :
-                    <div className='font-bold mt-2' >
-                        <Link
-                            onClick={(e) => e.stopPropagation()}
-                            to={"/payment/" + productData?._id}
-                            className='inline-block p-3 bg-3 shadow-first w-[50%] text-center '
-                        >
-                            <p className='text-[white]'>Buy Now</p>
-                        </Link>
-                        <button
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                dispatch(addToCart(productData))
-                            }}
-                            className='p-3 bg-2 w-[50%]'
-                        >
-                            <span className='lg:hidden' >Cart+</span>
-                            <span className='hidden lg:block' >Add to Cart+</span>
-                        </button>
-                    </div>
+                loggedInUser.admin === true &&
+                <div className='font-bold mt-2' >
+                    <Link
+                        onClick={(e) => e.stopPropagation()}
+                        to={"/update-product/" + productData?._id}
+                        className='inline-block p-3 bg-[orange] shadow-first w-[50%] text-center '
+                    >
+                        <p className='text-[white]' >Update</p>
+                    </Link>
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            dispatch(addToCart(productData))
+                        }}
+                        className='p-3 bg-[red] w-[50%]'
+                    >
+                        <span onClick={handleDelete} className='hidden lg:block text-[white]' >Delete</span>
+                    </button>
+                </div>
             }
         </div>
     );
