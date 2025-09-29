@@ -19,8 +19,8 @@ const OrderDetails = () => {
         return;
     }
     return (
-        <>
-            <p className='text-[25px] font-bold text-center my-6'>Your Order Details</p>
+        <div className='w-[70%] mx-auto' >
+            <p className='text-[25px] font-bold text-center mt-24 mb-16'>Your Order Details</p>
             <div className='flex mx-4'>
                 <div className='shrink-0 w-[400px] bg-[red]'>
                     <img className='w-[full] bg-green-500' src={orderDetails.productData?.image} alt="" />
@@ -34,7 +34,7 @@ const OrderDetails = () => {
                     <p><span className='my-4 font-bold'>Delivery Status: </span> {orderDetails.shippingStatus} </p>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

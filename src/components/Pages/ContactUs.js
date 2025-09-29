@@ -1,22 +1,17 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addQueryThunk } from "../../features/userSlice";
 
 export default function ContactUs() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", form);
-    alert("Message sent! We'll get back to you soon.");
-    setForm({ name: "", email: "", message: "" });
+    dispatch(addQueryThunk({ name: e.target.name.value, email: e.target.email.value, message: e.target.message.value }));
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
-      <div className="max-w-2xl w-full bg-white rounded-2xl shadow-lg p-8">
+      <div className="max-w-2xl w-full bg-white rounded-2xl shadow-lg p-8 mx-auto mt-24">
         <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center">
           Contact Us
         </h2>
@@ -30,8 +25,6 @@ export default function ContactUs() {
               type="text"
               id="name"
               name="name"
-              value={form.name}
-              onChange={handleChange}
               required
               className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-3"
             />
@@ -45,8 +38,6 @@ export default function ContactUs() {
               type="email"
               id="email"
               name="email"
-              value={form.email}
-              onChange={handleChange}
               required
               className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-3"
             />
@@ -59,8 +50,6 @@ export default function ContactUs() {
             <textarea
               id="message"
               name="message"
-              value={form.message}
-              onChange={handleChange}
               required
               rows="5"
               className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-3"
@@ -77,9 +66,8 @@ export default function ContactUs() {
 
         <div className="mt-8 text-center text-gray-600">
           <p>Or reach us directly at:</p>
-          <p className="font-medium text-indigo-600">support@example.com</p>
+          <p className="font-medium text-indigo-600">gadgetgeek@example.com</p>
         </div>
       </div>
-    </div>
   );
 }

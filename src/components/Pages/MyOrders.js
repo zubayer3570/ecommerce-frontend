@@ -13,7 +13,7 @@ const MyOrders = () => {
     return (
         <>
             <div className='w-[70%] mx-auto' >
-                <p className='text-[25px] font-bold text-center my-4'>Pending Orders</p>
+                <p className='text-[25px] font-bold text-center mt-24 mb-16'>Pending Orders</p>
                 <div className='grid lg:grid-cols-4 mx-4 gap-4'>
                     {
                         myOrders.map(order => <MyOrdersCard key={order._id} orderDetails={order} />)

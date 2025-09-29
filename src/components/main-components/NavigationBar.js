@@ -20,7 +20,7 @@ const NavigationBar = () => {
     return (
 
         <div className='sticky top-0 z-[2] bg-3 '>
-            <div className='flex justify-between items-center h-[50px] font-bold text-[16px] p-8 lg:ml-[100px] lg:mr-[50px]'>
+            <div className='flex justify-between items-center h-[50px] font-bold text-[16px] p-8 lg:ml-[100px]'>
                 <div className='flex text-[white] items-center'>
                     <Link to='/' className='text-[18px]' >GadgetGeek</Link>
                 </div>
@@ -42,38 +42,36 @@ const NavigationBar = () => {
                             </div>
                             <Link to={'/add-product'} className='ml-2 mr-8'>Create Product</Link>
                             <Link to={'/all-users'} className='ml-2 mr-8'>All Users</Link>
-                            <Link to={'/add-product'} className='ml-2 mr-8'>All Queries</Link>
+                            <Link to={'/all-user-queries'} className='ml-2 mr-8'>All Queries</Link>
                         </>
                     }
-                    <>
-                        <div className='grid grid-cols-2 text-[white]'>
-                            <Link to='/cart'>Cart</Link>
-                            {
-                                cartItem?.length == 0 ?
-                                    <div></div>
-                                    :
-                                    <button className='mt-[-5px] text-[12px] h-[18px] w-[18px] bg-[red] text-[white] font-black rounded-full'>
-                                        {cartItem?.length}
-                                    </button>
-                            }
-                        </div>
+                    <div className='grid grid-cols-2 text-[white]'>
+                        <Link to='/cart'>Cart</Link>
                         {
-                            loggedInUser?._id ?
-                                <div className='grid grid-cols-2 text-[white]'>
-                                    <Link to={'/my-orders'}>Orders</Link>
-                                    {
-                                        myOrders?.length == 0 ?
-                                            <div></div>
-                                            :
-                                            <button className='mt-[-5px] text-[12px] h-[18px] w-[18px] bg-[red] text-[white] font-black rounded-full'>
-                                                {myOrders?.length}
-                                            </button>
-                                    }
-                                </div>
+                            cartItem?.length == 0 ?
+                                <div></div>
                                 :
-                                <div className='hidden' ></div>
+                                <button className='mt-[-5px] text-[12px] h-[18px] w-[18px] bg-[red] text-[white] font-black rounded-full'>
+                                    {cartItem?.length}
+                                </button>
                         }
-                    </>
+                    </div>
+                    {
+                        loggedInUser?._id ?
+                            <div className='grid grid-cols-2 text-[white]'>
+                                <Link to={'/my-orders'}>Orders</Link>
+                                {
+                                    myOrders?.length == 0 ?
+                                        <div></div>
+                                        :
+                                        <button className='mt-[-5px] text-[12px] h-[18px] w-[18px] bg-[red] text-[white] font-black rounded-full'>
+                                            {myOrders?.length}
+                                        </button>
+                                }
+                            </div>
+                            :
+                            <div className='hidden' ></div>
+                    }
                 </div>
 
                 <div className='hidden lg:block shrink px-8'>
@@ -81,11 +79,11 @@ const NavigationBar = () => {
                 </div>
 
                 <div className='flex items-center bg-red-500'>
-                    <img src="/search-icon-white.svg" onClick={() => navigate('/search-page')} className='lg:hidden block mr-2' alt="" />
+                    {/* <img src="/search-icon-white.svg" onClick={() => navigate('/search-page')} className='lg:hidden block mr-2' alt="" /> */}
                     {
                         loggedInUser?._id ?
                             <div onClick={() => navigate("/profile")}>
-                                <img src={loggedInUser.proPic} className='h-[30px] w-[30px] rounded-full cursor-pointer' alt="" />
+                                <img src={loggedInUser.proPic} className='h-[38px] w-[38px] rounded-full cursor-pointer' alt="" />
                             </div>
                             :
                             <div>
@@ -95,6 +93,8 @@ const NavigationBar = () => {
                     }
                     <img src="/hamburger.svg" onClick={() => setHamState(!hamState)} className='lg:hidden block mr-2' alt="" />
                 </div>
+
+                <Link to={'/contact-us'} className='ml-8 mr-8 text-[white] hidden lg:block'>Contact Us</Link>
 
                 {
                     hamState ?
@@ -113,6 +113,7 @@ const NavigationBar = () => {
                                         ""
                                 }
                                 <li><Link to='/cart'>cart</Link> </li>
+                                <li><Link to='/contact-us'>Contact Us</Link></li>
 
                             </ul>
                         </div>

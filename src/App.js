@@ -31,6 +31,8 @@ import UpdateProduct from './components/Pages/UpdateProduct';
 import ContactUs from './components/Pages/ContactUs';
 import AllUsers from './components/main-components/AllUsers';
 import UserInformationPage from './components/Pages/UserInformationPage';
+import AllUserQueries from './components/Pages/AllUserQueries';
+import QueryReply from './components/Pages/QueryReply';
 
 function App() {
   const dispatch = useDispatch()
@@ -87,6 +89,8 @@ function App() {
         <Route path='/add-product' element={<RequireUser><AddProduct /></RequireUser>}></Route>
         <Route path='/all-users' element={<RequireUser><AllUsers /></RequireUser>}></Route>
         <Route path='/update-product/:productID' element={<UpdateProduct />}></Route>
+        <Route path='/all-user-queries' element={<AllUserQueries />}></Route>
+        <Route path='/reply-to-query/:queryID' element={<QueryReply />}></Route>
 
       </Routes>
       <Footer position={footerState} />

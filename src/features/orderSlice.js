@@ -22,6 +22,7 @@ export const updateOrderStatus = createAsyncThunk("updating-status", async (data
         {
             headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
         })
+    console.log("slice", res.data)
     return res.data
 })
 

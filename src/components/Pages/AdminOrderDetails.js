@@ -26,8 +26,8 @@ const AdminOrderDetails = () => {
         return
     }
     return (
-        <>
-            <p className='text-[25px] font-bold text-center my-6'>Admin Order Details</p>
+        <div className='w-[70%] mx-auto' >
+            <p className='text-[25px] font-bold text-center mt-24 mb-16'>Admin Order Details</p>
             <div className='grid grid-cols-2 mx-4'>
                 <img src={orderDetails?.productData.image} className='block' alt="" />
                 <div className='ml-4'>
@@ -44,7 +44,7 @@ const AdminOrderDetails = () => {
                     <button onClick={() => setToggle(!toggle)} className={(toggle ? "block " : "hidden") + " p-2 bg-3 rounded-md mr-4 text-[white] font-bold"} >Update Delivery Status</button>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

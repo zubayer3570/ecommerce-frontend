@@ -17,7 +17,7 @@ const Product = () => {
 
     return (
         <>
-            <p className='text-[25px] font-bold text-center my-6'>Product Details</p>
+            <p className='text-[25px] font-bold text-center mt-20 mb-16'>Product Details</p>
             <div className='flex justify-center' >
                 <div className='flex flex-col lg:flex-row mx-4 lg:w-[60%]'>
                     <div className='shrink-0 w-full lg:w-[400px]'>

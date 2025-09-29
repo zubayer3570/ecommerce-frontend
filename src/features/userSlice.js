@@ -72,10 +72,40 @@ export const deleteUserThunk = createAsyncThunk("deleteUser", async (data) => {
     return res.data
 })
 
+export const addQueryThunk = createAsyncThunk("addQuery", async (data) => {
+    const res = await axios.post("http://localhost:5000/add-query", data)
+    return res.data
+})
+
+export const fetchAllUserQueriesThunk = createAsyncThunk("addQuery", async (data) => {
+    const res = await axios.get("http://localhost:5000/all-user-queries",
+        {
+            headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
+        }
+    )
+    console.log(res.data)
+    return res.data
+})
+
+export const queryReplyThunk = createAsyncThunk("queryReply", async (data) => {
+    const res = await axios.post("http://localhost:5000/query-reply", data,
+        {
+            headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
+        })
+    return res.data
+})
+
+export const deleteQueryThunk = createAsyncThunk("deleteQuery", async (data) => {
+    const res = await axios.delete("http://localhost:5000/delete-query/" + data.queryID,
+        {
+            headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
+        })
+    return res.data
+})
 
 const userSlice = createSlice({
     name: "userSlice",
-    initialState: { loggedInUser: {}, allUsers: [], userInformation: {}, loading: false },
+    initialState: { loggedInUser: {}, allUsers: [], userInformation: {}, allUserQueries: [], loading: false },
     reducers: {
         logout: (state) => {
             signOut(auth)
@@ -123,6 +153,15 @@ const userSlice = createSlice({
         builder.addCase(deleteUserThunk.fulfilled, (state, action) => {
             const remainingUsers = state.allUsers.filter(user => user._id !== action.payload.deletedUser._id)
             return { ...state, allUsers: remainingUsers, loading: false };
+        })
+
+        builder.addCase(fetchAllUserQueriesThunk.fulfilled, (state, action) => {
+            return { ...state, allUserQueries: action.payload.allUserQueries, loading: false };
+        })
+
+        builder.addCase(deleteQueryThunk.fulfilled, (state, action) => {
+            const remainingQueries = state.allUserQueries.filter(query => query._id !== action.payload.deletedQuery._id)
+            return { ...state, allUserQueries: remainingQueries, loading: false };
         })
     }
 })
