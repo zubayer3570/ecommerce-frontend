@@ -5,12 +5,13 @@ import { cancelOrder } from '../../features/orderSlice';
 
 const MyOrdersCard = ({ orderDetails }) => {
     const dispatch = useDispatch()
+    console.log(orderDetails)
     return (
         <div className='shadow-first p-4 rounded-md overflow-hidden'>
             <div className='h-[200px] overflow-hidden'>
-                <img src={orderDetails.productData.image} className='w-full rounded-md' alt="" />
+                <img src={orderDetails?.productData?.image} className='w-full rounded-md' alt="" />
             </div>
-            <p className='font-bold my-4'>{orderDetails.productData.title}</p>
+            <p className='font-bold my-4'>{orderDetails.productData?.title}</p>
             <p className='my-4'> <span className='font-bold'>Quantity:</span> {orderDetails.quantity} piece</p>
             <p className='my-4'><span className='font-bold'>Amount:</span> {orderDetails.totalAmount}tk</p>
             <div className='grid grid-cols-2 gap-2'>

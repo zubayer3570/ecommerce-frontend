@@ -66,7 +66,7 @@ export default function ContactUs() {
 
         <div className="mt-8 text-center text-gray-600">
           <p>Or reach us directly at:</p>
-          <p className="font-medium text-indigo-600">gadgetgeek@example.com</p>
+          <p className="font-medium text-indigo-600">gadgetgeek@support.com</p>
         </div>
       </div>
   );

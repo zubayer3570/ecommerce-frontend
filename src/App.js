@@ -34,6 +34,7 @@ import UserInformationPage from './components/Pages/UserInformationPage';
 import AllUserQueries from './components/Pages/AllUserQueries';
 import QueryReply from './components/Pages/QueryReply';
 
+// (function () { if (!window.chatbase || window.chatbase("getState") !== "initialized") { window.chatbase = (...args) => { if (!window.chatbase.q) { window.chatbase.q = [] } window.chatbase.q.push(args) }; window.chatbase = new Proxy(window.chatbase, { get(target, prop) { if (prop === "q") { return target.q } return (...args) => target(prop, ...args) } }) } const onLoad = function () { const script = document.createElement("script"); script.src = "https://www.chatbase.co/embed.min.js"; script.id = "PDT5l6yzj3Mhh7KJYZbu2"; script.domain = "www.chatbase.co"; document.body.appendChild(script) }; if (document.readyState === "complete") { onLoad() } else { window.addEventListener("load", onLoad) } })();
 function App() {
   const dispatch = useDispatch()
   const { loggedInUser } = useSelector(state => state.user)
@@ -91,6 +92,8 @@ function App() {
         <Route path='/update-product/:productID' element={<UpdateProduct />}></Route>
         <Route path='/all-user-queries' element={<AllUserQueries />}></Route>
         <Route path='/reply-to-query/:queryID' element={<QueryReply />}></Route>
+
+
 
       </Routes>
       <Footer position={footerState} />

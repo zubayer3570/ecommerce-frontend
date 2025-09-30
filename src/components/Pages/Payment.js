@@ -108,7 +108,7 @@ const Payment = () => {
                         </p>
                         <p className="my-4 font-semibold text-lg text-gray-700">
                             Unit Price:{" "}
-                            <span className="text-emerald-600 font-bold">${productData.price}</span>
+                            <span className="text-emerald-600 font-bold">{productData.price} Taka</span>
                         </p>
                     </div>
 
@@ -146,7 +146,7 @@ const Payment = () => {
                     {/* Grand Total */}
                     <p className="font-bold text-xl text-gray-800 mt-6">
                         Grand Total:{" "}
-                        <span className="text-emerald-600">${grandTotal}</span>
+                        <span className="text-emerald-600">{grandTotal} Taka</span>
                     </p>
 
                     {/* Actions */}
