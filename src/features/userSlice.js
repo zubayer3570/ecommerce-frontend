@@ -9,7 +9,7 @@ export const userSignup = createAsyncThunk("signup", async (data) => {
     try {
         const { user } = await createUserWithEmailAndPassword(auth, data.get("email"), data.get("password"))
         await sendEmailVerification(user)
-        const res = await axios.post("http://localhost:5000/signup", data);
+        const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/signup", data);
         localStorage.removeItem("accessToken")
         localStorage.setItem("accessToken", JSON.stringify({ jwt: res.data.jwt }))
         return res.data;
@@ -23,7 +23,7 @@ export const userLogin = createAsyncThunk("login", async (data) => {
         if (!auth.currentUser) {
             await signInWithEmailAndPassword(auth, data.email, data.password)
         }
-        const res = await axios.post("http://localhost:5000/login", data);
+        const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/login", data);
         localStorage.removeItem("accessToken")
         localStorage.setItem("accessToken", JSON.stringify({ jwt: res.data.jwt }))
         return res.data;
@@ -34,7 +34,7 @@ export const userLogin = createAsyncThunk("login", async (data) => {
 
 export const fetchUserThunk = createAsyncThunk("fetchUser", async (data) => {
     try {
-        const res = await axios.post("http://localhost:5000/user-information", data, {
+        const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/user-information", data, {
             headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
         });
         return res.data;
@@ -46,7 +46,7 @@ export const fetchUserThunk = createAsyncThunk("fetchUser", async (data) => {
 export const fetchAllUsersThunk = createAsyncThunk("allUsers", async () => {
     try {
         console.log("fetching all users frontend")
-        const res = await axios.get("http://localhost:5000/all-users",
+        const res = await axios.get("https://ecommerce-backend-d4lh.onrender.com/all-users",
             {
                 headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
             })
@@ -57,7 +57,7 @@ export const fetchAllUsersThunk = createAsyncThunk("allUsers", async () => {
 })
 
 export const makeAdminThunk = createAsyncThunk("makeAdmin", async (data) => {
-    const res = await axios.post("http://localhost:5000/make-admin", data,
+    const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/make-admin", data,
         {
             headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
         })
@@ -65,7 +65,7 @@ export const makeAdminThunk = createAsyncThunk("makeAdmin", async (data) => {
 })
 
 export const deleteUserThunk = createAsyncThunk("deleteUser", async (data) => {
-    const res = await axios.post("http://localhost:5000/delete-user", data,
+    const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/delete-user", data,
         {
             headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
         })
@@ -73,12 +73,12 @@ export const deleteUserThunk = createAsyncThunk("deleteUser", async (data) => {
 })
 
 export const addQueryThunk = createAsyncThunk("addQuery", async (data) => {
-    const res = await axios.post("http://localhost:5000/add-query", data)
+    const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/add-query", data)
     return res.data
 })
 
 export const fetchAllUserQueriesThunk = createAsyncThunk("addQuery", async (data) => {
-    const res = await axios.get("http://localhost:5000/all-user-queries",
+    const res = await axios.get("https://ecommerce-backend-d4lh.onrender.com/all-user-queries",
         {
             headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
         }
@@ -88,7 +88,7 @@ export const fetchAllUserQueriesThunk = createAsyncThunk("addQuery", async (data
 })
 
 export const queryReplyThunk = createAsyncThunk("queryReply", async (data) => {
-    const res = await axios.post("http://localhost:5000/query-reply", data,
+    const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/query-reply", data,
         {
             headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
         })
@@ -96,7 +96,7 @@ export const queryReplyThunk = createAsyncThunk("queryReply", async (data) => {
 })
 
 export const deleteQueryThunk = createAsyncThunk("deleteQuery", async (data) => {
-    const res = await axios.delete("http://localhost:5000/delete-query/" + data.queryID,
+    const res = await axios.delete("https://ecommerce-backend-d4lh.onrender.com/delete-query/" + data.queryID,
         {
             headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
         })

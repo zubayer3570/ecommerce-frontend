@@ -5,16 +5,16 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchProduct = createAsyncThunk("fech-product", async (producID) => {
-    const { data } = await axios.get("http://localhost:5000/fetch-product/" + producID)
+    const { data } = await axios.get("https://ecommerce-backend-d4lh.onrender.com/fetch-product/" + producID)
     return data;
 })
 export const fetchAllProducts = createAsyncThunk("fech-all-product", async (param) => {
-    const res = await axios.get("http://localhost:5000/all-products")
+    const res = await axios.get("https://ecommerce-backend-d4lh.onrender.com/all-products")
     return res.data;
 })
 
 export const addProduct = createAsyncThunk("addProduct", async (data) => {
-    const res = await axios.post("http://localhost:5000/add-product", data,
+    const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/add-product", data,
         {
             headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
         })
@@ -22,7 +22,7 @@ export const addProduct = createAsyncThunk("addProduct", async (data) => {
 })
 
 export const updateProductThunk = createAsyncThunk("updateProduct", async (data) => {
-    const res = await axios.post("http://localhost:5000/update-product", data,
+    const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/update-product", data,
         {
             headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
         })
@@ -31,7 +31,7 @@ export const updateProductThunk = createAsyncThunk("updateProduct", async (data)
 
 export const deleteProductThunk = createAsyncThunk("deleteProduct", async (data) => {
     console.log("heeeeeeeeeeeeeeeeeeeeeeeee")
-    const res = await axios.post("http://localhost:5000/delete-product", data,
+    const res = await axios.post("https://ecommerce-backend-d4lh.onrender.com/delete-product", data,
         {
             headers: { Authorization: JSON.parse(localStorage.getItem('accessToken')).jwt }
         })
